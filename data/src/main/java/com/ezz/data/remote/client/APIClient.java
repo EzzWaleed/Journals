@@ -7,6 +7,10 @@ import retrofit2.Retrofit;
 /**
  * Created by Ezz Waleed on 04,March,2019
  */
+
+/**
+ * Abstraction/Wrapper for the news api service
+ **/
 public class APIClient {
 
     private Retrofit retrofit;
@@ -16,7 +20,10 @@ public class APIClient {
         this.retrofit = retrofit;
     }
 
-    public NewsAPI getNewsAPI(){
+    /**
+     * creates news api service class which is implemented by retrofit
+     **/
+    public NewsAPI getNewsAPI() {
         return retrofit.create(NewsAPI.class);
     }
 

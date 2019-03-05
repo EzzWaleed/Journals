@@ -16,6 +16,10 @@ import javax.inject.Inject;
 /**
  * Created by Ezz Waleed on 04,March,2019
  */
+
+/**
+ * Picasso implementation of {@link ImageLoader} interface.
+ */
 public class PicassoImageLoader implements ImageLoader {
 
     private Picasso picasso;
@@ -25,24 +29,14 @@ public class PicassoImageLoader implements ImageLoader {
         this.picasso = picasso;
     }
 
-    /**
-     * Default error resource is white
-     *
-     * @param imageView   imageview to load into
-     * @param progressBar show and hide progress
-     * @param url         url to be loaded
-     */
+
     @Override
     public void loadImageWithProgress(final ImageView imageView, final ProgressBar progressBar, String url) {
         loadImageWithProgress(imageView, progressBar, url, R.color.transparent, R.color.white);
     }
 
 
-    /**
-     * @param imageView   imageview to load into
-     * @param progressBar show and hide progress
-     * @param url         url to be loaded
-     */
+
     @Override
     public void loadImageWithProgress(final ImageView imageView, final ProgressBar progressBar, String url, int placeHolder, final int error) {
         if (url == null || url.isEmpty()) {
@@ -64,21 +58,13 @@ public class PicassoImageLoader implements ImageLoader {
         });
     }
 
-    /**
-     * Default error resource is transparent
-     *
-     * @param imageView imageview to load into
-     * @param url       url to be loaded
-     */
+
     @Override
     public void loadImageWithoutProgress(final ImageView imageView, String url) {
         loadImageWithoutProgress(imageView, url, R.color.transparent, R.color.white);
     }
 
-    /**
-     * @param imageView imageview to load into
-     * @param url       url to be loaded
-     */
+
     @Override
     public void loadImageWithoutProgress(final ImageView imageView, String url, int placeHolder, final int error) {
         if (url == null || url.isEmpty()) {
