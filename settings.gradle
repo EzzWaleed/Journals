@@ -1,1 +1,1 @@
-include ':ui', ':domain'
+include ':ui', ':domain', ':data'
