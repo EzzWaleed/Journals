@@ -3,7 +3,7 @@ package com.ezz.domain.entity;
 /**
  * Created by Ezz Waleed on 04,March,2019
  */
-public class News {
+public class NewsDomain {
 
     private String title;
 
@@ -15,7 +15,7 @@ public class News {
 
     private String imageUrl;
 
-    private String publishedDate;
+    private long publishedDate;
 
     private String authorName;
 
@@ -61,11 +61,11 @@ public class News {
         this.imageUrl = imageUrl;
     }
 
-    public String getPublishedDate() {
+    public long getPublishedDate() {
         return publishedDate;
     }
 
-    public void setPublishedDate(String publishedDate) {
+    public void setPublishedDate(long publishedDate) {
         this.publishedDate = publishedDate;
     }
 

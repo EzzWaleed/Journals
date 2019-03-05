@@ -1,7 +1,7 @@
 package com.ezz.domain.repository;
 
 
-import com.ezz.domain.entity.News;
+import com.ezz.domain.entity.NewsDomain;
 
 import java.util.List;
 
@@ -12,10 +12,10 @@ import io.reactivex.Observable;
  */
 public interface NewsRepository {
 
-    Observable<News> getNews(int pageNumber);
+    Observable<NewsDomain> getNews(int pageNumber);
 
-    Observable<News> searchNews(String query);
+    Observable<NewsDomain> searchNews(String query);
 
-    void insertNews(List<News> newsList);
+    void insertNews(List<NewsDomain> newsDomainList);
 
 }
