@@ -14,11 +14,12 @@ import okhttp3.Response;
  * Created by Ezz Waleed on 04,March,2019
  */
 
-/*
- APIInterceptor is Intercept every network request and add API Key to it.
- */
 
+/**
+ APIInterceptor Intercepts every network request and add API Key to it.
+ **/
 public class APIInterceptor implements Interceptor {
+
 
 
     @Inject
