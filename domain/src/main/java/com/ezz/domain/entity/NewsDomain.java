@@ -3,7 +3,7 @@ package com.ezz.domain.entity;
 /**
  * Created by Ezz Waleed on 04,March,2019
  */
-public class News {
+public class NewsDomain {
 
     private String title;
 

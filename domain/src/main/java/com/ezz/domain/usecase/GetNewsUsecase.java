@@ -1,7 +1,7 @@
 package com.ezz.domain.usecase;
 
 
-import com.ezz.domain.entity.News;
+import com.ezz.domain.entity.NewsDomain;
 import com.ezz.domain.repository.NewsRepository;
 
 import javax.inject.Inject;
@@ -20,7 +20,7 @@ public class GetNewsUsecase {
         this.newsRepository = newsRepository;
     }
 
-    public Observable<News> getNews(int pageNumber){
+    public Observable<NewsDomain> getNews(int pageNumber){
         return newsRepository.getNews(pageNumber);
     }
 
