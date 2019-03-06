@@ -18,6 +18,9 @@ public class NewsResponse
     @SerializedName("newsRemotes")
     @Expose
     private List<NewsRemote> newsRemotes;
+    @SerializedName("code")
+    @Expose
+    private String code;
 
 
 
@@ -45,4 +48,11 @@ public class NewsResponse
         this.newsRemotes = newsRemotes;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 }

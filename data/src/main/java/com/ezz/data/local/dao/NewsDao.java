@@ -22,7 +22,7 @@ public abstract class NewsDao {
      * creates data source of {@link NewsLocal} sorted by date DESC
      */
     @Query("SELECT * FROM NewsLocal ORDER BY published_date DESC")
-    abstract DataSource<Integer, NewsLocal> newsByDate();
+    public abstract DataSource.Factory<Integer, NewsLocal> newsByDate();
 
     /**
      * deletes all {@link NewsLocal} records between two dates

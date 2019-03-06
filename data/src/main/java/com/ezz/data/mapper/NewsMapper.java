@@ -2,7 +2,10 @@ package com.ezz.data.mapper;
 
 import com.ezz.data.local.model.NewsLocal;
 import com.ezz.data.remote.model.NewsRemote;
+import com.ezz.data.remote.model.NewsResponse;
 import com.ezz.domain.entity.NewsDomain;
+import com.ezz.domain.resource.DataStatus;
+import com.ezz.domain.resource.Resource;
 
 import java.util.List;
 
@@ -69,6 +72,22 @@ public interface NewsMapper {
      * @return mapped list.
      */
     List<NewsLocal> mapDomainListToLocal(@NonNull List<NewsDomain> newsDomainList);
+
+    /**
+     * determine {@link NewsResponse} network status and return it as {@link DataStatus}
+     * @param newsResponse news network response
+     * @param pageNumber response page number
+     * @return mapping result
+     */
+    DataStatus mapToDataStatus(@NonNull NewsResponse newsResponse,@NonNull Integer pageNumber);
+
+    /**
+     * associate {@link NewsResponse} network status with its data into {@link Resource<NewsResponse>}
+     * @param newsResponse news response
+     * @param pageNumber response page number
+     * @return mapping result
+     */
+    Resource<List<NewsDomain>> mapToNewsDomainResource(@NonNull NewsResponse newsResponse, @NonNull Integer pageNumber);
 
 
 }

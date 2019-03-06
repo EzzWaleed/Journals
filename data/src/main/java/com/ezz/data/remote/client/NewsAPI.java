@@ -14,5 +14,5 @@ public interface NewsAPI {
 	Single<NewsResponse> requestTopHeadlines(@Query("page") Integer pageNumber);
 
 	@GET("everything")
-	Single<NewsResponse> searchForANews(@Query("q") String query, @Query("page") Integer pageNumber);
+	Single<NewsResponse> searchForNews(@Query("q") String query, @Query("page") Integer pageNumber);
 }

@@ -26,4 +26,12 @@ public class SettingsAPI {
 	public static Integer getNumberOfItemsPerPage() {
 		return 10;
 	}
+
+	public enum NetworkStatus{
+		ok, error
+	}
+
+	public enum NetworkCodes {
+		apiKeyInvalid, maximumResultsReached
+	}
 }
