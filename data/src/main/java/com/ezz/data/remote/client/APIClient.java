@@ -13,18 +13,17 @@ import retrofit2.Retrofit;
  **/
 public class APIClient {
 
-    private Retrofit retrofit;
+	private Retrofit retrofit;
 
-    @Inject
-    public APIClient(Retrofit retrofit) {
-        this.retrofit = retrofit;
-    }
+	@Inject
+	public APIClient(Retrofit retrofit) {
+		this.retrofit = retrofit;
+	}
 
-    /**
-     * creates news api service class which is implemented by retrofit
-     **/
-    public NewsAPI getNewsAPI() {
-        return retrofit.create(NewsAPI.class);
-    }
-
+	/**
+	 * creates news api service class which is implemented by retrofit
+	 **/
+	public NewsAPI getNewsAPI() {
+		return retrofit.create(NewsAPI.class);
+	}
 }
