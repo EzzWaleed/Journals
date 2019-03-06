@@ -17,7 +17,7 @@ public class Resource<T> {
 	@Nullable public final T data;
 	@Nullable public final String message;
 
-	private Resource(@NonNull DataStatus status, @Nullable T data,
+	public Resource(@NonNull DataStatus status, @Nullable T data,
 					 @Nullable String message) {
 		this.status = status;
 		this.data = data;
