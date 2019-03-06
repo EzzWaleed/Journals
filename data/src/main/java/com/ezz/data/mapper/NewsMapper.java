@@ -50,11 +50,25 @@ public interface NewsMapper {
     NewsLocal mapToLocal(@NonNull NewsRemote newsRemote);
 
     /**
+     * map {@link NewsDomain} to {@link NewsLocal}
+     * @param newsDomain entity to be mapped
+     * @return mapped entity
+     */
+    NewsLocal mapToLocal(@NonNull NewsDomain newsDomain);
+
+    /**
      * map {@link NewsRemote} list to {@link NewsLocal} list.
      * @param newsRemoteList list to be mapped.
      * @return mapped list.
      */
-    List<NewsLocal> mapListToLocal(@NonNull List<NewsRemote> newsRemoteList);
+    List<NewsLocal> mapRemoteListToLocal(@NonNull List<NewsRemote> newsRemoteList);
+
+    /**
+     * map {@link NewsDomain} list to {@link NewsLocal} list.
+     * @param newsDomainList list to be mapped.
+     * @return mapped list.
+     */
+    List<NewsLocal> mapDomainListToLocal(@NonNull List<NewsDomain> newsDomainList);
 
 
 }

@@ -5,6 +5,9 @@ import android.content.Context;
 
 import com.ezz.data.local.dao.NewsDao;
 import com.ezz.data.local.di.DatabaseModule;
+import com.ezz.data.mapper.NewsMapper;
+import com.ezz.data.mapper.di.NewsMapperModule;
+import com.ezz.data.remote.client.NewsAPI;
 import com.ezz.data.remote.di.ImageLoaderModule;
 import com.ezz.data.remote.di.NetworkModule;
 import com.ezz.data.remote.imageloader.ImageLoader;
@@ -16,12 +19,13 @@ import retrofit2.Retrofit;
 /**
  * Created by Ezz Waleed on 04,March,2019
  */
-@Component(modules = {NetworkModule.class, ImageLoaderModule.class, DatabaseModule.class})
+@Component(modules = {NetworkModule.class, ImageLoaderModule.class, DatabaseModule.class, NewsMapperModule.class})
 @DataScope
 public interface DataComponent {
-    Retrofit retrofit();
+    NewsAPI newsAPI();
     ImageLoader imageLoader();
     NewsDao newsDao();
+    NewsMapper newsMapper();
 
     @Component.Builder
     interface Builder {
