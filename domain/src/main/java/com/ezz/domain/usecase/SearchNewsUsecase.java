@@ -24,11 +24,12 @@ public class SearchNewsUsecase {
 
     /**
      * retrieves {@link NewsDomain} list associated with its network status as stream of Observable
-     * according to the requested search query
+     * according to the requested search query and page number
      * @param query the requested search query
+     * @param pageNumber requested page number
      * @return list of {@link NewsDomain} list associated with its network status as stream of Observable
      */
-    public Observable<Resource<List<NewsDomain>>> searchNews(String query){
-        return newsRepository.searchNews(query);
+    public Observable<Resource<List<NewsDomain>>> searchNews(String query, Integer pageNumber){
+        return newsRepository.searchNews(query, pageNumber);
     }
 }

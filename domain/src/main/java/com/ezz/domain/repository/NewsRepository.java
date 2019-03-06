@@ -30,8 +30,9 @@ public interface NewsRepository {
 
 	/**
 	 * retrieves {@link NewsDomain} list associated with its network status as stream of Observable
-	 * according to the requested search query
+	 * according to the requested search query and page number
 	 * @param query the requested search query
+	 * @param pageNumber the requested page number
 	 * @return list of {@link NewsDomain} list associated with its network status as stream of Observable
 	 */
 	Observable<Resource<List<NewsDomain>>> searchNews(String query, Integer pageNumber);
