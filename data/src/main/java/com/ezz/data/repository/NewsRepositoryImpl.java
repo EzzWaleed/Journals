@@ -16,8 +16,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import androidx.paging.DataSource;
-import androidx.paging.PagedList;
-import androidx.paging.RxPagedListBuilder;
 import io.reactivex.Observable;
 
 /*
@@ -50,20 +48,8 @@ public class NewsRepositoryImpl implements NewsRepository {
 	}
 
 	@Override
-	public Observable<PagedList<NewsDomain>> getNewsPagedList() {
-		DataSource.Factory<Integer, NewsDomain> domainDataSourceFactory = newsDao.newsByDate().map((NewsLocal newsLocal) -> newsMapper.mapToDomain(newsLocal));
-		return createPagedListFromDataSource(domainDataSourceFactory);
-	}
-
-	/**
-	 * creates {@link NewsDomain} paged list as observable stream
-	 *
-	 * @param dataSourceFactory data source factory of {@link NewsDomain}
-	 * @return {@link NewsDomain} paged list as observable stream
-	 */
-	private Observable<PagedList<NewsDomain>> createPagedListFromDataSource(DataSource.Factory<Integer, NewsDomain> dataSourceFactory) {
-		PagedList.Config config = new PagedList.Config.Builder().setPageSize(SettingsAPI.getNumberOfItemsPerPage()).build();
-		return new RxPagedListBuilder<>(dataSourceFactory, config).buildObservable();
+	public DataSource.Factory<Integer, NewsDomain> getNewsDataSourceFactory() {
+		return newsDao.newsByDate().map((NewsLocal newsLocal) -> newsMapper.mapToDomain(newsLocal));
 	}
 
 	@Override
