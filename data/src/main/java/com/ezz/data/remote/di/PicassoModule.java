@@ -2,7 +2,6 @@ package com.ezz.data.remote.di;
 
 import android.content.Context;
 
-
 import com.ezz.data.di.DataScope;
 import com.squareup.picasso.Downloader;
 import com.squareup.picasso.OkHttp3Downloader;
@@ -14,7 +13,6 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 
-
 import static com.ezz.data.remote.di.NetworkModule.OK_HTTP_PICASSO;
 
 /**
@@ -23,18 +21,16 @@ import static com.ezz.data.remote.di.NetworkModule.OK_HTTP_PICASSO;
 @Module(includes = {NetworkModule.class})
 public class PicassoModule {
 
-    @Provides
-    public static Downloader downloader(@Named(OK_HTTP_PICASSO) OkHttpClient okHttpClient){
-        return new OkHttp3Downloader(okHttpClient);
-    }
+	@Provides
+	public static Downloader downloader(@Named(OK_HTTP_PICASSO) OkHttpClient okHttpClient) {
+		return new OkHttp3Downloader(okHttpClient);
+	}
 
-
-    @Provides
-    @DataScope
-    public static Picasso picasso(Context context, Downloader downloader){
-        return new Picasso.Builder(context)
-                .downloader(downloader)
-                .build();
-    }
-
+	@Provides
+	@DataScope
+	public static Picasso picasso(Context context, Downloader downloader) {
+		return new Picasso.Builder(context)
+		.downloader(downloader)
+		.build();
+	}
 }

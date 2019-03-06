@@ -1,8 +1,8 @@
 package com.ezz.data.remote.di;
 
-
 import com.ezz.data.di.DataScope;
 import com.ezz.data.remote.client.APIInterceptor;
+import com.ezz.data.remote.client.NewsAPI;
 import com.ezz.data.remote.client.SettingsAPI;
 
 import java.util.concurrent.TimeUnit;
@@ -23,53 +23,54 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public abstract class NetworkModule {
 
-    public static final String  OK_HTTP_RETROFIT = "okHttpRetrofit";
-    public static final String  OK_HTTP_PICASSO = "okHttpPicasso";
+	public static final String OK_HTTP_RETROFIT = "okHttpRetrofit";
+	public static final String OK_HTTP_PICASSO = "okHttpPicasso";
 
-    @Provides
-    @DataScope
-    @Named(value = OK_HTTP_RETROFIT)
-    public static OkHttpClient provideOkhttpRetrofitClient(APIInterceptor apiInterceptor){
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        httpClient.readTimeout(SettingsAPI.getTimeout(), TimeUnit.MILLISECONDS);
-        httpClient.writeTimeout(SettingsAPI.getTimeout(), TimeUnit.MILLISECONDS);
+	@Provides
+	@DataScope
+	@Named(value = OK_HTTP_RETROFIT)
+	public static OkHttpClient provideOkhttpRetrofitClient(APIInterceptor apiInterceptor) {
+		OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+		httpClient.readTimeout(SettingsAPI.getTimeout(), TimeUnit.MILLISECONDS);
+		httpClient.writeTimeout(SettingsAPI.getTimeout(), TimeUnit.MILLISECONDS);
 
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+		HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+		logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        httpClient.addInterceptor(logging);
-        httpClient.addInterceptor(apiInterceptor);
+		httpClient.addInterceptor(logging);
+		httpClient.addInterceptor(apiInterceptor);
 
-        return httpClient.build();
-    }
+		return httpClient.build();
+	}
 
-    @Provides
-    @DataScope
-    @Named(value = OK_HTTP_PICASSO)
-    public static OkHttpClient provideOkhttPicasoClient(){
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        httpClient.readTimeout(SettingsAPI.getTimeout(), TimeUnit.MILLISECONDS);
-        httpClient.writeTimeout(SettingsAPI.getTimeout(), TimeUnit.MILLISECONDS);
+	@Provides
+	@DataScope
+	@Named(value = OK_HTTP_PICASSO)
+	public static OkHttpClient provideOkhttPicasoClient() {
+		OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+		httpClient.readTimeout(SettingsAPI.getTimeout(), TimeUnit.MILLISECONDS);
+		httpClient.writeTimeout(SettingsAPI.getTimeout(), TimeUnit.MILLISECONDS);
 
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+		HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+		logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        httpClient.addInterceptor(logging);
+		httpClient.addInterceptor(logging);
 
-        return httpClient.build();
-    }
+		return httpClient.build();
+	}
 
+	@Provides
+	public static Retrofit provideRetrofit(@Named(value = OK_HTTP_RETROFIT) OkHttpClient okHttpClient) {
+		return new Retrofit.Builder()
+		.baseUrl(SettingsAPI.getBaseURL())
+		.addConverterFactory(GsonConverterFactory.create())
+		.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+		.client(okHttpClient)
+		.build();
+	}
 
-
-    @Provides
-    public static Retrofit provideRetrofit(@Named(value = OK_HTTP_RETROFIT) OkHttpClient okHttpClient){
-        return new Retrofit.Builder()
-                .baseUrl(SettingsAPI.getBaseURL())
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(okHttpClient)
-                .build();
-    }
-
-
+	@Provides
+	public static NewsAPI provideNewsAPI(Retrofit retrofit) {
+		return retrofit.create(NewsAPI.class);
+	}
 }

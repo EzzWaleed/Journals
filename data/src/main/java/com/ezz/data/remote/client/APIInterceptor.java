@@ -19,7 +19,7 @@ import okhttp3.Response;
 public class APIInterceptor implements Interceptor {
 
 	@Inject
-	public APIInterceptor() {
+	APIInterceptor() {
 	}
 
 	@Override
