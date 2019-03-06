@@ -19,10 +19,9 @@ import androidx.paging.DataSource;
 import androidx.paging.PagedList;
 import androidx.paging.RxPagedListBuilder;
 import io.reactivex.Observable;
-import io.reactivex.Observer;
 
-/**
- * Created by Ezz Waleed on 06,March,2019
+/*
+  Created by Ezz Waleed on 06,March,2019
  */
 
 /**

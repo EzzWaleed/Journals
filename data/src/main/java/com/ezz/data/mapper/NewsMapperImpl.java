@@ -117,12 +117,9 @@ public class NewsMapperImpl implements NewsMapper {
 	public DataStatus mapToDataStatus(@NonNull NewsResponse newsResponse, @NonNull Integer pageNumber) {
 		switch (SettingsAPI.NetworkStatus.valueOf(newsResponse.getStatus())) {
 			case ok:
-
 				if (isLastPage(newsResponse, pageNumber))
 					return DataStatus.HAS_LOADED_ALL_ITEMS;
-
 				return DataStatus.SUCCESS;
-
 			case error:
 				switch (SettingsAPI.NetworkCodes.valueOf(newsResponse.getCode())) {
 					case apiKeyInvalid:
