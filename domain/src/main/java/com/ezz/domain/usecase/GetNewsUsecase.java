@@ -7,6 +7,7 @@ import com.ezz.domain.resource.DataStatus;
 
 import javax.inject.Inject;
 
+import androidx.paging.DataSource;
 import androidx.paging.PagedList;
 
 import io.reactivex.Observable;
@@ -33,11 +34,12 @@ public class GetNewsUsecase {
     }
 
 	/**
-	 * retrieves {@link NewsDomain} as a stream of observable pages
-	 * @return the requested paged stream of {@link NewsDomain}
+	 * retrieves {@link NewsDomain} data source factory.
+	 * @return the requested {@link NewsDomain} data source factory.
 	 */
-	public Observable<PagedList<NewsDomain>> getNewsPagedList(){
-		return newsRepository.getNewsPagedList();
+	// TODO: 3/7/19 change return type to PagedList when google adds PagedList transformation capability.
+	public DataSource.Factory<Integer, NewsDomain> getNewsPagedList(){
+		return newsRepository.getNewsDataSourceFactory();
 	}
 
 }
