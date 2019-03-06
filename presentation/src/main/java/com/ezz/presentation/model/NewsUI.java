@@ -34,6 +34,9 @@ public class NewsUI implements Parcelable {
 		sourceName = in.readString();
 	}
 
+	public NewsUI() {
+	}
+
 	public static final Creator<NewsUI> CREATOR = new Creator<NewsUI>() {
 		@Override
 		public NewsUI createFromParcel(Parcel in) {
