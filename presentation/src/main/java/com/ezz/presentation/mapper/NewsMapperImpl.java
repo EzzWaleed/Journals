@@ -8,8 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.paging.DataSource;
-import androidx.paging.PagedList;
+
 
 /**
  * Created by Ezz Waleed on 07,March,2019
