@@ -7,7 +7,6 @@ import com.ezz.domain.resource.Resource;
 import java.util.List;
 
 import androidx.paging.DataSource;
-import androidx.paging.PagedList;
 import io.reactivex.Observable;
 
 /**
