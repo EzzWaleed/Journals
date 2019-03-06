@@ -34,7 +34,7 @@ public interface NewsRepository {
 	 * @param query the requested search query
 	 * @return list of {@link NewsDomain} list associated with its network status as stream of Observable
 	 */
-	Observable<Resource<List<NewsDomain>>> searchNews(String query);
+	Observable<Resource<List<NewsDomain>>> searchNews(String query, Integer pageNumber);
 
 	/**
 	 * insert list of {@link NewsDomain} into local db
