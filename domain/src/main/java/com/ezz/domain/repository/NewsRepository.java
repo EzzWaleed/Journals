@@ -6,6 +6,7 @@ import com.ezz.domain.resource.Resource;
 
 import java.util.List;
 
+import androidx.paging.DataSource;
 import androidx.paging.PagedList;
 import io.reactivex.Observable;
 
@@ -23,10 +24,11 @@ public interface NewsRepository {
 	Observable<DataStatus> loadNews(int pageNumber);
 
 	/**
-	 * retrieves {@link NewsDomain} as a stream of observable pages
-	 * @return the requested {@link NewsDomain} pagedList stream
+	 * retrieves {@link NewsDomain} data source factory.
+	 * @return the requested {@link NewsDomain} data source factory.
 	 */
-	Observable<PagedList<NewsDomain>> getNewsPagedList();
+	// TODO: 3/7/19 change return type to PagedList when google adds PagedList transformation capability.
+	DataSource.Factory<Integer, NewsDomain> getNewsDataSourceFactory();
 
 	/**
 	 * retrieves {@link NewsDomain} list associated with its network status as stream of Observable
