@@ -55,7 +55,7 @@ public class NewsViewModel extends BaseViewModel {
 
 	public void loadNews(int pageNumber){
 		execute(loading -> loadNewsStats.setValue(DataStatus.LOADING),
-		dataStatus -> {},
+		dataStatus -> {loadNewsStats.setValue(dataStatus);},
 		throwable -> loadNewsStats.setValue(DataStatus.ERROR),
 		newsUsecase.loadNews(pageNumber));
 	}
