@@ -1,6 +1,7 @@
 package com.ezz.presentation.viewmodel.viewmodel_factory.di;
 
 import com.ezz.presentation.di.PresentationScope;
+import com.ezz.presentation.viewmodel.news.di.NewsVmModule;
 import com.ezz.presentation.viewmodel.viewmodel_factory.ViewModelFactory;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -10,7 +11,7 @@ import dagger.Module;
 /**
  * Created by Ezz Waleed on 07,March,2019
  */
-@Module
+@Module(includes = {NewsVmModule.class})
 public interface ViewModelFactoryModule {
 	@Binds
 	@PresentationScope

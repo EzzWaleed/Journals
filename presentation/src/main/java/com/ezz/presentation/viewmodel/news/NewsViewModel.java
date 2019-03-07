@@ -12,6 +12,7 @@ import com.ezz.presentation.model.NewsUI;
 import com.ezz.presentation.viewmodel.BaseViewModel;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -19,6 +20,9 @@ import androidx.paging.DataSource;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 import io.reactivex.Scheduler;
+
+import static com.ezz.presentation.di.SchedulersModule.IO_SCHEDULER;
+import static com.ezz.presentation.di.SchedulersModule.MAIN_THREAD_SCHEDULER;
 
 /**
  * Created by Ezz Waleed on 07,March,2019
@@ -33,7 +37,7 @@ public class NewsViewModel extends BaseViewModel {
 	public MutableLiveData<DataStatus> loadNewsStats = new MutableLiveData<>();
 
 	@Inject
-	public NewsViewModel(Scheduler subscribeOn, Scheduler observeOn, GetNewsUsecase newsUsecase) {
+	public NewsViewModel(@Named(value = IO_SCHEDULER) Scheduler subscribeOn,@Named(value = MAIN_THREAD_SCHEDULER) Scheduler observeOn, GetNewsUsecase newsUsecase) {
 		super(subscribeOn, observeOn);
 		this.newsUsecase = newsUsecase;
 		newsPagedListLiveData = createNewsPagedList();
