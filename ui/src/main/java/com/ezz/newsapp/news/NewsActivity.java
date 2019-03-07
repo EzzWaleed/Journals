@@ -1,8 +1,8 @@
-package com.ezz.newsapp;
+package com.ezz.newsapp.news;
 
 import android.os.Bundle;
 
-
+import com.ezz.newsapp.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
