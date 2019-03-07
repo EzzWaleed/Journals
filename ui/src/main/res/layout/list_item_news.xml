@@ -12,28 +12,16 @@
 
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/time_tv"
-            app:layout_constraintHorizontal_bias="0.652"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/title_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:ellipsize="end"
-                android:gravity="center"
-                android:lines="1"
-                android:textColor="@color/colorPrimary"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                tools:text="@tools:sample/lorem" />
 
             <TextView
                 android:id="@+id/source_name_tv"
@@ -42,32 +30,39 @@
                 android:layout_gravity="center"
                 android:ellipsize="end"
                 android:gravity="center"
-                android:lines="1"
+                android:lines="2"
+                android:maxWidth="150dp"
                 android:textColor="@color/color_black"
-                android:textSize="12sp"
-                tools:text="@tools:sample/lorem" />
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="Snopes.com" />
+
 
         </LinearLayout>
 
         <TextView
             android:id="@+id/time_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="8dp"
-            android:textSize="16sp"
+            android:maxLines="1"
+            android:textSize="12sp"
+            android:gravity="end"
+            android:ellipsize="end"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.534"
-            tools:text="now" />
+            tools:text="@tools:sample/lorem" />
 
         <ImageButton
             android:id="@+id/share_ig_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
@@ -85,6 +80,24 @@
         android:layout_height="wrap_content">
 
 
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:maxWidth="200dp"
+            android:textColor="@color/color_black"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="After DC Rally, Kentucky Could Make 'Doxing' Minors a Crime - Snopes.com" />
+
 
 
         <TextView
@@ -98,10 +111,9 @@
             android:textColor="@color/color_black"
             android:textSize="14sp"
             android:ellipsize="end"
-            android:maxLines="2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/title_tv" />
 
 
         <TextView
