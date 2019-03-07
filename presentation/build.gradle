@@ -38,6 +38,9 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.1.14'
     // ViewModel + LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
+    // Dagger
+    implementation 'com.google.dagger:dagger:2.21'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

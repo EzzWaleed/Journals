@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Presentation</string>
+    <string name="error_occured_message">An error has been occured.</string>
 </resources>

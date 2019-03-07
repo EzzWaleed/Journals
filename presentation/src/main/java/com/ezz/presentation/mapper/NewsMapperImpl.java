@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import androidx.annotation.NonNull;
 
 
@@ -18,6 +20,11 @@ import androidx.annotation.NonNull;
  * Implementation of {@link NewsMapper}
  */
 public class NewsMapperImpl implements NewsMapper {
+
+	@Inject
+	public NewsMapperImpl() {
+	}
+
 	@Override
 	public NewsUI mapToUI(@NonNull NewsDomain newsDomain) {
 		NewsUI newsUI = new NewsUI();
