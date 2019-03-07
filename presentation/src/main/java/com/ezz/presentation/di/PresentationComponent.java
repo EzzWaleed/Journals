@@ -9,9 +9,9 @@ import dagger.Component;
 /**
  * Created by Ezz Waleed on 07,March,2019
  */
-@Component(dependencies = {MapperModule.class, ViewModelFactoryModule.class})
+@Component(modules = {MapperModule.class, ViewModelFactoryModule.class})
 @PresentationScope
-public class PresentationComponent {
+public abstract class PresentationComponent {
 	ViewModelFactory viewModelFactory;
 	MapperModule mapperModule;
 }
