@@ -65,7 +65,7 @@
             app:layout_constraintStart_toEndOf="@+id/linearLayout"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@tools:sample/lorem"
-            app:date="@{news.publishedDate}"/>
+            date="@{news.publishedDate}"/>
 
         <ImageButton
             android:id="@+id/share_ig_btn"
@@ -149,7 +149,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/date_tv"
             tools:src="@color/colorAccent"
-            app:url="@{news.imageUrl}"/>
+            url="@{news.imageUrl}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

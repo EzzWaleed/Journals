@@ -25,7 +25,7 @@ public class PrettyTimeAdapter {
 		this.prettyTime = prettyTime;
 	}
 
-	@BindingAdapter(value = "app:date")
+	@BindingAdapter(value = "date")
 	public void setPrettyTime(TextView textView, Date date){
 		textView.setText(prettyTime.format(date));
 	}

@@ -24,7 +24,7 @@ public class ImageBindingAdapter {
 		this.imageLoader = imageLoader;
 	}
 
-	@BindingAdapter(value = {"app:url"})
+	@BindingAdapter(value = {"url"})
 	public void loadImage(ImageView imageView, String url){
 		imageLoader.loadImageWithoutProgress(imageView, url, R.color.white, R.color.white);
 	}
