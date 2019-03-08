@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="news"
+            type="com.ezz.presentation.model.NewsUI"/>
+    </data>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -35,7 +41,8 @@
                 android:textColor="@color/color_black"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                tools:text="@tools:sample/lorem/random" />
+                tools:text="@tools:sample/lorem/random"
+                android:text="@{news.sourceName}"/>
 
 
         </LinearLayout>
@@ -57,7 +64,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/linearLayout"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@tools:sample/lorem" />
+            tools:text="@tools:sample/lorem"
+            app:date="@{news.publishedDate}"/>
 
         <ImageButton
             android:id="@+id/share_ig_btn"
@@ -96,7 +104,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="After DC Rally, Kentucky Could Make 'Doxing' Minors a Crime - Snopes.com" />
+            tools:text="@tools:sample/lorem/random"
+            android:text="@{news.title}"/>
 
 
 
@@ -113,7 +122,8 @@
             android:ellipsize="end"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_tv" />
+            app:layout_constraintTop_toBottomOf="@id/title_tv"
+            android:text="@{news.description}"/>
 
 
         <TextView
@@ -128,7 +138,8 @@
             app:layout_constraintTop_toBottomOf="@+id/description_tv"
             tools:text="@tools:sample/date/mmddyy"
             android:textColor="@color/color_black"
-            android:lines="1"/>
+            android:lines="1"
+            android:text="@{news.dateFormatted"/>
 
         <ImageView
             android:layout_width="0dp"
@@ -137,8 +148,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/date_tv"
-            tools:src="@color/colorAccent"/>
+            tools:src="@color/colorAccent"
+            app:url="@{news.imageUrl}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
+
+</layout>

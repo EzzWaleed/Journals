@@ -3,7 +3,9 @@ package com.ezz.presentation.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -103,6 +105,11 @@ public class NewsUI implements Parcelable {
 
 	public void setSourceName(String sourceName) {
 		this.sourceName = sourceName;
+	}
+
+	public String getDateFormatted(){
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE ddMMM yyyy", Locale.US);
+		return simpleDateFormat.format(publishedDate);
 	}
 
 	@Override
