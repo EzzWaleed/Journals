@@ -12,7 +12,7 @@ public class SettingsAPI {
 	}
 
 	public static String getBaseURL() {
-		return "https://api.themoviedb.org/";
+		return "https://newsapi.org/v2/";
 	}
 
 	public static Long getTimeout() {
