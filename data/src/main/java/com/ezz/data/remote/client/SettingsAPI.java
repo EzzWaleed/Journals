@@ -20,7 +20,7 @@ public class SettingsAPI {
 	}
 
 	public static SimpleDateFormat getDateNetworkFormat() {
-		return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss z", Locale.US);
+		return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX", Locale.US);
 	}
 
 	public static Integer getNumberOfItemsPerPage() {
