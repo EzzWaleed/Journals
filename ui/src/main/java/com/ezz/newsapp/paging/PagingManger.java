@@ -13,14 +13,16 @@ import androidx.annotation.NonNull;
 /**
  * Manage Paginate callbacks and states
  */
-public class PagingCallbacksManger implements Paginate.Callbacks {
+public class PagingManger implements Paginate.Callbacks {
+
+	private int pageNumber = 1;
 
 	private boolean loading = false;
 	private boolean loadedAllItems = false;
 	private LoadMoreListener loadMoreListener;
 
 	@Inject
-	public PagingCallbacksManger(@NonNull LoadMoreListener loadMoreListener) {
+	public PagingManger(@NonNull LoadMoreListener loadMoreListener) {
 		this.loadMoreListener = loadMoreListener;
 	}
 
@@ -49,5 +51,13 @@ public class PagingCallbacksManger implements Paginate.Callbacks {
 
 	public interface LoadMoreListener{
 		void onLoadMore();
+	}
+
+	public int getPageNumber() {
+		return pageNumber;
+	}
+
+	public void incrementPageNumber(){
+		pageNumber++;
 	}
 }

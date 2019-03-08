@@ -1,7 +1,7 @@
 package com.ezz.newsapp.news.di;
 
 import com.ezz.newsapp.news.NewsActivity;
-import com.ezz.newsapp.paging.PagingCallbacksManger;
+import com.ezz.newsapp.paging.PagingManger;
 import com.ezz.presentation.di.PresentationComponent;
 
 import dagger.BindsInstance;
@@ -20,7 +20,7 @@ public interface NewsScreenComponent {
 	interface Builder{
 
 		@BindsInstance
-		Builder loadMoreListener(PagingCallbacksManger.LoadMoreListener loadMoreListener);
+		Builder loadMoreListener(PagingManger.LoadMoreListener loadMoreListener);
 
 		Builder PresentationComponent(PresentationComponent presentationComponent);
 

@@ -10,11 +10,11 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/news_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/list_item_news"
-        tools:itemCount="6"
-        ></androidx.recyclerview.widget.RecyclerView>
+        tools:itemCount="6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
