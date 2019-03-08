@@ -50,6 +50,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     // Android Arch Room
     implementation 'androidx.room:room-runtime:2.1.0-alpha04'
+    annotationProcessor 'androidx.room:room:compiler:2.1.0-alpha04'
     implementation 'androidx.room:room-rxjava2:2.1.0-alpha04'
     //Paging
     implementation 'androidx.paging:paging-runtime:2.1.0'
