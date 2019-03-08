@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 public class NewsRemote
 {
 
-    @SerializedName("sourceRemote")
+    @SerializedName("source")
     @Expose
     private SourceRemote sourceRemote;
     @SerializedName("author")
