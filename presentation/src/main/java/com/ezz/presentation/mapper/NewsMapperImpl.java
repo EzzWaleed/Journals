@@ -1,6 +1,7 @@
 package com.ezz.presentation.mapper;
 
 import com.ezz.domain.entity.NewsDomain;
+import com.ezz.domain.resource.Resource;
 import com.ezz.presentation.model.NewsUI;
 
 import java.util.ArrayList;
@@ -56,4 +57,11 @@ public class NewsMapperImpl implements NewsMapper {
 		return newsUIList;
 	}
 
+	@Override
+	public Resource<List<NewsUI>> mapToUIResourceList(@NonNull Resource<List<NewsDomain>> domainResource) {
+		if (domainResource.data != null)
+			return new Resource<>(domainResource.status, mapToUIList(domainResource.data), domainResource.message);
+		else
+			return new Resource<>(domainResource.status, null, domainResource.message);
+	}
 }
