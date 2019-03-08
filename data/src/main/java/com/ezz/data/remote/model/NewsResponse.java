@@ -15,7 +15,7 @@ public class NewsResponse
     @SerializedName("totalResults")
     @Expose
     private Integer totalResults;
-    @SerializedName("newsRemotes")
+    @SerializedName("articles")
     @Expose
     private List<NewsRemote> newsRemotes;
     @SerializedName("code")
