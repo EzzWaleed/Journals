@@ -12,7 +12,7 @@ public class SettingsAPI {
 	}
 
 	public static String getBaseURL() {
-		return "https://api.themoviedb.org/";
+		return "https://newsapi.org/v2/";
 	}
 
 	public static Long getTimeout() {
@@ -25,6 +25,10 @@ public class SettingsAPI {
 
 	public static Integer getNumberOfItemsPerPage() {
 		return 10;
+	}
+
+	public static String getCountryISO2(){
+		return "us";
 	}
 
 	public enum NetworkStatus{
