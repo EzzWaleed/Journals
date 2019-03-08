@@ -1,6 +1,7 @@
 package com.ezz.presentation.mapper;
 
 import com.ezz.domain.entity.NewsDomain;
+import com.ezz.domain.resource.Resource;
 import com.ezz.presentation.model.NewsUI;
 
 import java.util.List;
@@ -26,5 +27,12 @@ public interface NewsMapper {
 	 * @return mapped list
 	 */
 	List<NewsUI> mapToUIList(@NonNull List<NewsDomain> newsDomainList);
+
+	/**
+	 * maps {@link NewsDomain} resource list to {@link NewsUI} resource list.
+	 * @param newsDomainListResource resource to be mapped
+	 * @return mapped resource
+	 */
+	Resource<List<NewsUI>> mapToUIResourceList(@NonNull Resource<List<NewsDomain>> newsDomainListResource);
 
 }
