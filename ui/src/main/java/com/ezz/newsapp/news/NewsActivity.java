@@ -68,14 +68,15 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 				case HAS_LOADED_ALL_ITEMS:
 					pagingManger.setLoadedAllItems(true);
 					break;
+				case LOADING:
+					return;
 			}
 			pagingManger.setLoading(false);
 		});
 
 		recyclerView.setAdapter(newsAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
-		Paginate.with(recyclerView, pagingManger).build();
-
+		Paginate.with(recyclerView, pagingManger).addLoadingListItem(false).setLoadingTriggerThreshold(50).build();
 	}
 
 	@Override
