@@ -35,7 +35,7 @@
                 android:textColor="@color/color_black"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                tools:text="Snopes.com" />
+                tools:text="@tools:sample/lorem/random" />
 
 
         </LinearLayout>
