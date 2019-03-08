@@ -37,9 +37,10 @@ public class NewsViewModel extends BaseViewModel {
 	public MutableLiveData<DataStatus> loadNewsStats = new MutableLiveData<>();
 
 	@Inject
-	public NewsViewModel(@Named(value = IO_SCHEDULER) Scheduler subscribeOn,@Named(value = MAIN_THREAD_SCHEDULER) Scheduler observeOn, GetNewsUsecase newsUsecase) {
+	public NewsViewModel(@Named(value = IO_SCHEDULER) Scheduler subscribeOn, @Named(value = MAIN_THREAD_SCHEDULER) Scheduler observeOn, GetNewsUsecase newsUsecase, NewsMapper newsMapper) {
 		super(subscribeOn, observeOn);
 		this.newsUsecase = newsUsecase;
+		this.newsMapper = newsMapper;
 		newsPagedListLiveData = createNewsPagedList();
 	}
 
