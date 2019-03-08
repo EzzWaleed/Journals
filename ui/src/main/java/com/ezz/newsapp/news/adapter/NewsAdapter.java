@@ -33,9 +33,10 @@ public class NewsAdapter extends PagedListAdapter<NewsUI, NewsAdapter.NewsViewHo
 	public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		LayoutInflater layoutInflater =
 		LayoutInflater.from(parent.getContext());
-		ViewDataBinding binding = DataBindingUtil.inflate(
-		layoutInflater, viewType, parent, false);
-		return new NewsViewHolder((ListItemNewsBinding) binding);	}
+		ListItemNewsBinding itemBinding =
+		ListItemNewsBinding.inflate(layoutInflater, parent, false);
+		return new NewsViewHolder(itemBinding);
+	}
 
 	@Override
 	public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
@@ -47,7 +48,7 @@ public class NewsAdapter extends PagedListAdapter<NewsUI, NewsAdapter.NewsViewHo
 
 		private final ListItemNewsBinding listItemNewsBinding;
 
-		public NewsViewHolder(@NonNull ListItemNewsBinding listItemNewsBinding) {
+		NewsViewHolder(@NonNull ListItemNewsBinding listItemNewsBinding) {
 			super(listItemNewsBinding.getRoot());
 			this.listItemNewsBinding = listItemNewsBinding;
 		}
