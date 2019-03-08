@@ -27,6 +27,10 @@ public class SettingsAPI {
 		return 10;
 	}
 
+	public static String getCountryISO2(){
+		return "us";
+	}
+
 	public enum NetworkStatus{
 		ok, error
 	}
