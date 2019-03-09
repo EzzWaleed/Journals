@@ -1,5 +1,7 @@
 package com.ezz.newsapp.binding_adapter;
 
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.ezz.data.remote.imageloader.ImageLoader;
@@ -26,15 +28,31 @@ public class ImageBindingAdapter {
 		this.imageLoader = imageLoader;
 	}
 
-	@BindingAdapter(value = {"url"})
+	@BindingAdapter(value = {"bind:url"})
 	public void loadImage(ImageView imageView, String url){
 		imageLoader.loadImageWithoutProgress(imageView, url, R.color.white, R.color.white);
 	}
 
-	@BindingAdapter(value = {"url"})
+	/**
+	 * Used to load image from remote with shimmer loading behaviour.
+	 * {@link ShimmerFrameLayout} rootView must contained at least one imageView with a tag to be able to use this adapter
+	 * @param shimmerFrameLayout shimmer container
+	 * @param url image remote url
+	 * @param tag contained image view tag.
+	 */
+	@BindingAdapter(value = {"bind:url", "bind:imageViewTag"})
 	public void loadImage(ShimmerFrameLayout shimmerFrameLayout, String url, String tag){
-		@Nullable ImageView imageView = shimmerFrameLayout.findViewWithTag(tag);
-		imageLoader.loadImageWithoutProgress(imageView, url, R.color.white, R.color.white);
+		@Nullable ImageView imageView = shimmerFrameLayout.getRootView().findViewWithTag(tag);
+		if (imageView != null) {
+			imageView.setVisibility(View.GONE);
+			shimmerFrameLayout.setVisibility(View.VISIBLE);
+			shimmerFrameLayout.startShimmer();
+			imageLoader.loadImageWithCallback(imageView, url, () -> {
+				shimmerFrameLayout.stopShimmer();
+				shimmerFrameLayout.setVisibility(View.GONE);
+				imageView.setVisibility(View.VISIBLE);
+			}, R.color.white, R.color.white);
+		}
 	}
 
 }

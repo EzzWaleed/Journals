@@ -15,4 +15,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="news_image_content_description">news image</string>
+    <string name="share_button_content_description">share button</string>
+    <string name="adjust_font_size_content_description">adjust font size button</string>
 </resources>

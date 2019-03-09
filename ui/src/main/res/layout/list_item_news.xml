@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout >
     <data>
         <variable
             name="news"
@@ -13,7 +13,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:foreground="@drawable/ripple_item">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -69,7 +70,7 @@
             app:layout_constraintStart_toEndOf="@+id/linearLayout"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@tools:sample/lorem"
-            date="@{news.publishedDate}"/>
+            app:date="@{news.publishedDate}"/>
 
         <ImageButton
             android:id="@+id/share_ig_btn"
@@ -86,7 +87,8 @@
             android:padding="5dp"
             android:scaleType="fitCenter"
             android:foreground="@drawable/ripple_round"
-            android:onClick="@{() -> onShareClick.onClick(news)}"/>
+            android:onClick="@{() -> onShareClick.onClick(news)}"
+            android:contentDescription="@string/share_button_content_description" />
 
 
 
@@ -157,21 +159,33 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/date_tv"
-            url="@{news.imageUrl}">
+            app:shimmer_auto_start="false"
+            app:url="@{news.imageUrl}"
+            app:shimmer_base_color="@color/colorPrimary"
+            app:imageViewTag='@{String.format("newsImage")}'>
 
 
-            <ImageView
-                android:id="@+id/news_image"
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:src="@color/colorAccent"
-                android:transitionName="@string/image_transition"
+                android:background="@color/color_bg_white_dark"
                 tools:targetApi="lollipop" />
 
 
         </com.facebook.shimmer.ShimmerFrameLayout>
 
-
+        <ImageView
+            android:id="@+id/news_image"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date_tv"
+            android:transitionName="@string/image_transition"
+            tools:targetApi="lollipop"
+            android:tag="newsImage"
+            android:contentDescription="@string/news_image_content_description" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

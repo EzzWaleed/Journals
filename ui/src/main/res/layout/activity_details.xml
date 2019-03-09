@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout >
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
             name="news"
@@ -11,7 +11,7 @@
             name="fontSettings"
             type="com.ezz.newsapp.news.details.font_settings.FontSettings"/>
     </data>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -42,7 +42,8 @@
                 android:padding="5dp"
                 android:scaleType="fitCenter"
                 android:onClick="onClick"
-                android:foreground="@drawable/ripple_round"/>
+                android:foreground="@drawable/ripple_round"
+                android:contentDescription="@string/share_button_content_description" />
 
             <ImageButton
                 android:id="@+id/font_btn"
@@ -55,7 +56,8 @@
                 android:padding="5dp"
                 android:scaleType="fitCenter"
                 android:onClick="onClick"
-                android:foreground="@drawable/ripple_round"/>
+                android:foreground="@drawable/ripple_round"
+                android:contentDescription="@string/adjust_font_size_content_description" />
 
 
 
@@ -106,7 +108,7 @@
 
                 <TextView
                     android:id="@+id/time_tv"
-                    date="@{news.publishedDate}"
+                    app:date="@{news.publishedDate}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -134,8 +136,8 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="16dp"
                 android:textColor="@color/color_black"
-                android:textSize="@{fontSettings.textSize}"
-                android:typeface="@{fontSettings.textStyle}"
+                android:textSize="@{fontSettings.textSize.get()}"
+                app:typeface="@{fontSettings.textStyle.get()}"
                 tools:text="@tools:sample/backgrounds/scenic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -156,7 +158,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/date_tv"
                 app:srcCompat="@color/white"
                 tools:targetApi="lollipop"
-                url="@{news.imageUrl}"/>
+                app:url="@{news.imageUrl}"
+                android:contentDescription="@string/news_image_content_description" />
 
             <TextView
                 android:id="@+id/content_tv"
@@ -165,8 +168,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:textSize="@{fontSettings.textSize}"
-                android:typeface="@{fontSettings.textStyle}"
+                android:textSize="@{fontSettings.textSize.get()}"
+                app:typeface="@{fontSettings.textStyle.get()}"
                 tools:text="@tools:sample/lorem/random"
                 android:textColor="@color/color_black"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -202,8 +205,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="8dp"
-                android:textSize="@{fontSettings.textSize}"
-                android:typeface="@{fontSettings.textStyle}"
+                android:textSize="@{fontSettings.textSize.get()}"
+                app:typeface="@{fontSettings.textStyle.get()}"
                 android:textColor="@color/color_black"
                 tools:text="@tools:sample/date/ddmmyy"
                 app:layout_constraintEnd_toEndOf="parent"

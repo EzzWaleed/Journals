@@ -7,4 +7,5 @@
     <color name="color_black">#000</color>
     <color name="whiteRippleOldApi">#42ffffff</color>
     <color name="color_divider">#DBDBDB</color>
+    <color name="color_primary_ripple">#8BDF4F2B</color>
 </resources>

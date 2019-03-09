@@ -9,7 +9,7 @@ import androidx.databinding.BindingAdapter;
  * Created by Ezz Waleed on 09,March,2019
  */
 public class TextStyleBindingAdapter {
-		@BindingAdapter("android:typeface")
+		@BindingAdapter("bind:typeface")
 		public static void setTypeface(TextView v, boolean isBold) {
 			if (isBold)
 				v.setTypeface(null, Typeface.BOLD);
