@@ -21,7 +21,7 @@ public class FontSettings {
 	 */
 	public void setTextSizeBy(int textSizePercentage) {
 		this.textSizePercentage.set(textSizePercentage);
-		this.textSize.set((110 * ((float)(textSizePercentage) / 100)));
+		this.textSize.set((90 * ((float)(textSizePercentage) / 100)));
 	}
 
 }
