@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdkVersion 28
@@ -48,6 +49,10 @@ dependencies {
     implementation 'com.github.markomilos:paginate:0.5.1'
     // ViewModel + LiveData
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    //Navigation
+    implementation "androidx.navigation:navigation-fragment:2.0.0-rc02"
+    implementation "androidx.navigation:navigation-ui:2.0.0-rc02"
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.2-alpha01'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.2-alpha01'
