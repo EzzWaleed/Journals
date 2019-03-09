@@ -139,7 +139,7 @@
             tools:text="@tools:sample/date/mmddyy"
             android:textColor="@color/color_black"
             android:lines="1"
-            android:text="@{news.dateFormatted"/>
+            android:text="@{news.dateFormatted}"/>
 
         <ImageView
             android:layout_width="0dp"
