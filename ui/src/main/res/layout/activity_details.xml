@@ -186,7 +186,7 @@
                 android:text="@string/continue_on_website"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="@{fontSettings.textSize}"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -204,7 +204,6 @@
                 android:layout_marginEnd="8dp"
                 android:textSize="@{fontSettings.textSize}"
                 android:typeface="@{fontSettings.textStyle}"
-
                 android:textColor="@color/color_black"
                 tools:text="@tools:sample/date/ddmmyy"
                 app:layout_constraintEnd_toEndOf="parent"
