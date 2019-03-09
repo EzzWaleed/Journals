@@ -3,25 +3,31 @@ package com.ezz.newsapp.news.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
-import com.ezz.newsapp.BR;
 import com.ezz.newsapp.R;
 import com.ezz.newsapp.databinding.ListItemNewsBinding;
+import com.ezz.newsapp.util.ShareUtil;
 import com.ezz.presentation.model.NewsUI;
 
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
+import androidx.annotation.Nullable;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.internal.Utils;
 
 /**
  * Created by Ezz Waleed on 08,March,2019
  */
 public class NewsAdapter extends PagedListAdapter<NewsUI, NewsAdapter.NewsViewHolder> {
+
+	@Nullable
+	private NewsClickListener clickListener;
 
 	@Inject
 	public NewsAdapter() {
@@ -44,19 +50,34 @@ public class NewsAdapter extends PagedListAdapter<NewsUI, NewsAdapter.NewsViewHo
 			holder.bind();
 	}
 
-	class NewsViewHolder extends RecyclerView.ViewHolder {
+	class NewsViewHolder extends RecyclerView.ViewHolder implements ShareClickListener{
 
 		private final ListItemNewsBinding listItemNewsBinding;
+
+		@BindView(R.id.news_image)
+		ImageView imageView;
 
 		NewsViewHolder(@NonNull ListItemNewsBinding listItemNewsBinding) {
 			super(listItemNewsBinding.getRoot());
 			this.listItemNewsBinding = listItemNewsBinding;
+			ButterKnife.bind(this, listItemNewsBinding.getRoot());
 		}
 
 		void bind(){
 			NewsUI newsUI = getItem(getAdapterPosition());
 			listItemNewsBinding.setNews(newsUI);
+			listItemNewsBinding.setOnShareClick(this::onClick);
 			listItemNewsBinding.executePendingBindings();
+			itemView.setOnClickListener(v -> {
+				if (clickListener != null) {
+					clickListener.onItemClick(newsUI, imageView);
+				}
+			});
+		}
+
+		@Override
+		public void onClick(NewsUI newsUI) {
+			ShareUtil.shareNews(itemView.getContext(), newsUI);
 		}
 	}
 
@@ -71,4 +92,21 @@ public class NewsAdapter extends PagedListAdapter<NewsUI, NewsAdapter.NewsViewHo
 			return oldItem.equals(newItem);
 		}
 	};
+
+	public void setClickListener(@Nullable NewsClickListener clickListener) {
+		this.clickListener = clickListener;
+	}
+
+	public interface NewsClickListener{
+		/**
+		 * onItemClickListener invokes when news item clicked.
+		 * @param newsUI clicked news item.
+		 * @param imageView clicked news imageView.
+		 */
+		void onItemClick(NewsUI newsUI, ImageView imageView);
+	}
+
+	public interface ShareClickListener{
+		void onClick(NewsUI newsUI);
+	}
 }

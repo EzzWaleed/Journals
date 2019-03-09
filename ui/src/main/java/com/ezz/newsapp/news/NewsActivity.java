@@ -1,17 +1,21 @@
 package com.ezz.newsapp.news;
 
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.ezz.newsapp.App;
 import com.ezz.newsapp.R;
 import com.ezz.newsapp.news.adapter.NewsAdapter;
+import com.ezz.newsapp.news.details.DetailsActivity;
 import com.ezz.newsapp.news.di.DaggerNewsScreenComponent;
 import com.ezz.newsapp.news.paging.PagingManger;
 import com.ezz.newsapp.search.SearchActivity;
-import com.ezz.presentation.model.NewsUI;
+
 import com.ezz.presentation.viewmodel.news.NewsViewModel;
-import com.ezz.presentation.viewmodel.search.SearchViewModel;
+
 import com.ezz.presentation.viewmodel.viewmodel_factory.ViewModelFactory;
 import com.google.android.material.snackbar.Snackbar;
 import com.paginate.Paginate;
@@ -21,9 +25,10 @@ import javax.inject.Inject;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.Observer;
+
+import androidx.core.view.MenuItemCompat;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.paging.PagedList;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -44,7 +49,7 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 	Toolbar toolbar;
 	@BindView(R.id.news_recycler_view)
 	RecyclerView recyclerView;
-	@BindView(R.id.search_view)
+
 	SearchView searchView;
 
 	NewsViewModel newsViewModel;
@@ -55,6 +60,7 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_news);
 		ButterKnife.bind(this);
+		setSupportActionBar(toolbar);
 
 		DaggerNewsScreenComponent.builder()
 		.loadMoreListener(this)
@@ -62,8 +68,6 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 		.build().inject(this);
 
 		newsViewModel = ViewModelProviders.of(this, viewModelFactory).get(NewsViewModel.class);
-
-		searchView.setOnQueryTextListener(this);
 
 		newsViewModel.loadNewsStats.observe(this, dataStatus -> {
 			switch (dataStatus){
@@ -91,8 +95,22 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		pagingManger.setPagingKeeper(newsViewModel.getPagingKeeper());
 		Paginate.with(recyclerView, pagingManger).addLoadingListItem(false).setLoadingTriggerThreshold(50).build();
+
+		newsAdapter.setClickListener((newsUI, imageView) ->
+		DetailsActivity.startDetailsActivity(this, newsUI, imageView));
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		setupSearchView(menu);
+		return true;
+	}
+
+	private void setupSearchView(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu_main, menu);
+		searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+		searchView.setOnQueryTextListener(this);
+	}
 
 	@Override
 	public void onLoadMore() {
@@ -111,6 +129,7 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 		searchView.setQuery("", false);
 		searchView.clearFocus();
 		searchView.setIconified(true);
+		toolbar.getMenu().findItem(R.id.action_search).collapseActionView();
 	}
 
 	private void startSearchActivity(String query) {
@@ -118,6 +137,8 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 		intent.putExtra(SearchActivity.SEARCH_QUERY_KEY, query);
 		startActivity(intent);
 	}
+
+
 
 	@Override
 	public boolean onQueryTextChange(String newText) {

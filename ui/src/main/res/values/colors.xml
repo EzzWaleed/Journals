@@ -5,4 +5,5 @@
     <color name="colorAccent">#ff8157</color>
     <color name="color_bg_white_dark">#60EBEBEB</color>
     <color name="color_black">#000</color>
+    <color name="whiteRippleOldApi">#42ffffff</color>
 </resources>

@@ -34,6 +34,7 @@ public class NewsUI implements Parcelable {
 		url = in.readString();
 		imageUrl = in.readString();
 		sourceName = in.readString();
+		publishedDate = new Date(in.readLong());
 	}
 
 	public NewsUI() {
@@ -125,6 +126,7 @@ public class NewsUI implements Parcelable {
 		dest.writeString(url);
 		dest.writeString(imageUrl);
 		dest.writeString(sourceName);
+		dest.writeLong(publishedDate.getTime());
 	}
 
 	@Override

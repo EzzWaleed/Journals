@@ -4,11 +4,15 @@
         <variable
             name="news"
             type="com.ezz.presentation.model.NewsUI"/>
+        <variable
+            name="onShareClick"
+            type="com.ezz.newsapp.news.adapter.NewsAdapter.ShareClickListener"/>
     </data>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -69,8 +73,8 @@
 
         <ImageButton
             android:id="@+id/share_ig_btn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
@@ -78,7 +82,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_share_black_24dp" />
+            app:srcCompat="@drawable/ic_share_black_24dp"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:foreground="@drawable/ripple_round"
+            android:onClick="@{() -> onShareClick.onClick(news)}"/>
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -142,6 +151,7 @@
             android:text="@{news.dateFormatted}"/>
 
         <ImageView
+            android:id="@+id/news_image"
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:layout_marginTop="8dp"
@@ -149,7 +159,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/date_tv"
             tools:src="@color/colorAccent"
-            url="@{news.imageUrl}"/>
+            android:transitionName="@string/image_transition"
+            url="@{news.imageUrl}"
+            tools:targetApi="lollipop" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

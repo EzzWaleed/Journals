@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.ezz.newsapp.App;
 import com.ezz.newsapp.R;
 import com.ezz.newsapp.news.adapter.NewsAdapter;
+import com.ezz.newsapp.news.details.DetailsActivity;
 import com.ezz.newsapp.search.di.DaggerSearchScreenComponent;
 import com.ezz.presentation.viewmodel.search.SearchViewModel;
 import com.ezz.presentation.viewmodel.viewmodel_factory.ViewModelFactory;
@@ -21,6 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import javax.inject.Inject;
@@ -29,7 +32,6 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 
 	public static final String SEARCH_QUERY_KEY = "searchQueryKey";
 
-	@BindView(R.id.search_view)
 	SearchView searchView;
 
 	@BindView(R.id.toolbar)
@@ -46,15 +48,18 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 
 	SearchViewModel searchViewModel;
 
+	private String searchQuery;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search);
-		setSupportActionBar(toolbar);
 
-		String searchQuery = getIntent().getStringExtra(SEARCH_QUERY_KEY);
+		searchQuery = getIntent().getStringExtra(SEARCH_QUERY_KEY);
 
 		ButterKnife.bind(this);
+
+		setSupportActionBar(toolbar);
 
 		DaggerSearchScreenComponent.builder().
 		presentationComponent(App.getPresentationComponent(this))
@@ -67,6 +72,22 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 		recyclerView.setAdapter(newsAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+		newsAdapter.setClickListener((newsUI, imageView) ->
+		DetailsActivity.startDetailsActivity(this, newsUI, imageView));
+
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu_main, menu);
+		MenuItem menuItem = menu.findItem(R.id.action_search);
+		setupSearchView(menuItem);
+		return true;
+	}
+
+	private void setupSearchView(MenuItem menuItem) {
+		menuItem.expandActionView();
+		searchView = (SearchView) menuItem.getActionView();
 		searchView.setOnQueryTextListener(this);
 		searchView.setQuery(searchQuery, true);
 		searchView.setIconified(false);

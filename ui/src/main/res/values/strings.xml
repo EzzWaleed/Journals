@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">NewsApp</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_news">NewsActivity</string>
-    <string name="title_activity_search">SearchActivity</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_details">DetailsActivity</string>
+    <string name="title_activity_news">News</string>
+    <string name="title_activity_search">Search</string>
+    <string name="title_activity_details">News Details</string>
+    <string name="continue_on_website">Continue on Website</string>
+    <string name="image_transition">news_image_transition</string>
+    <string name="search_title">Search</string>
 </resources>
