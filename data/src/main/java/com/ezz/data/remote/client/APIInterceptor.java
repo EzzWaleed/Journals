@@ -33,7 +33,6 @@ public class APIInterceptor implements Interceptor {
 		.addQueryParameter("apiKey", SettingsAPI.getApiKey())
 		//Adding default page size to request url
 		.addQueryParameter("pageSize", SettingsAPI.getNumberOfItemsPerPage().toString())
-		.addQueryParameter("country", SettingsAPI.getCountryISO2())
 		.build();
 
 		Request.Builder requestBuilder = original.newBuilder().url(url);

@@ -40,7 +40,7 @@ public class NewsRepositoryImpl implements NewsRepository {
 
 	@Override
 	public Observable<DataStatus> loadNews(int pageNumber) {
-		return newsAPI.requestTopHeadlines(pageNumber).map((NewsResponse newsResponse) ->{
+		return newsAPI.requestTopHeadlines(pageNumber, SettingsAPI.getCountryISO2()).map((NewsResponse newsResponse) ->{
 			DataStatus newsStatus = newsMapper.mapToDataStatus(newsResponse, pageNumber);
 			insertNews(newsMapper.mapRemoteListToDomain(newsResponse.getNewsRemotes()), pageNumber == 1, newsStatus == DataStatus.HAS_LOADED_ALL_ITEMS);
 			return newsStatus;
