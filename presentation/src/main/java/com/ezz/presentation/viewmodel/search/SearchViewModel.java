@@ -57,9 +57,10 @@ public class SearchViewModel extends ViewModel {
 			dataSourceFactoryLiveData.removeObserver(pagedListObserver);
 		}
 		dataSourceFactoryLiveData = new LivePagedListBuilder<>(searchDataSourceFactory, 10).build();
+		dataSourceFactoryLiveData.observeForever(pagedListObserver);
 	}
 
-	Observer<PagedList<NewsUI>> pagedListObserver = newsUIPagedList -> {
+	private Observer<PagedList<NewsUI>> pagedListObserver = newsUIPagedList -> {
 		newsLiveData.setValue(newsUIPagedList);
 	};
 
