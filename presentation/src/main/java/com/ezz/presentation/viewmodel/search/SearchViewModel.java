@@ -39,7 +39,7 @@ public class SearchViewModel extends ViewModel {
 
 	private SearchDataSourceFactory searchDataSourceFactory;
 
-	MutableLiveData<PagedList<NewsUI>> newsLiveData = new MutableLiveData<>();
+	public MutableLiveData<PagedList<NewsUI>> newsLiveData = new MutableLiveData<>();
 
 	private LiveData<PagedList<NewsUI>> dataSourceFactoryLiveData;
 
