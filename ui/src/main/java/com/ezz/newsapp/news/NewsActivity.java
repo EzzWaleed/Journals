@@ -1,5 +1,6 @@
 package com.ezz.newsapp.news;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.ezz.newsapp.App;
@@ -7,6 +8,7 @@ import com.ezz.newsapp.R;
 import com.ezz.newsapp.news.adapter.NewsAdapter;
 import com.ezz.newsapp.news.di.DaggerNewsScreenComponent;
 import com.ezz.newsapp.paging.PagingManger;
+import com.ezz.newsapp.search.SearchActivity;
 import com.ezz.presentation.model.NewsUI;
 import com.ezz.presentation.viewmodel.news.NewsViewModel;
 import com.ezz.presentation.viewmodel.search.SearchViewModel;
@@ -27,7 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class NewsActivity extends AppCompatActivity implements PagingManger.LoadMoreListener, SearchView.OnQueryTextListener, SearchView.OnCloseListener{
+public class NewsActivity extends AppCompatActivity implements PagingManger.LoadMoreListener, SearchView.OnQueryTextListener{
 
 	@Inject
 	NewsAdapter newsAdapter;
@@ -46,9 +48,7 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 	SearchView searchView;
 
 	NewsViewModel newsViewModel;
-	SearchViewModel searchViewModel;
 
-	private Paginate paginate;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +62,8 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 		.build().inject(this);
 
 		newsViewModel = ViewModelProviders.of(this, viewModelFactory).get(NewsViewModel.class);
-		searchViewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchViewModel.class);
 
 		searchView.setOnQueryTextListener(this);
-
 
 		newsViewModel.loadNewsStats.observe(this, dataStatus -> {
 			switch (dataStatus){
@@ -87,14 +85,13 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 		});
 
 
+		newsViewModel.newsPagedListLiveData.observe(this, newsUIPagedList -> newsAdapter.submitList(newsUIPagedList));
+
 		recyclerView.setAdapter(newsAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
-		paginate = Paginate.with(recyclerView, pagingManger).addLoadingListItem(false).setLoadingTriggerThreshold(50).build();
+		Paginate.with(recyclerView, pagingManger).addLoadingListItem(false).setLoadingTriggerThreshold(50).build();
 	}
 
-	Observer<PagedList<NewsUI>> pagedListObserver = newsUIPagedList -> {
-		newsAdapter.submitList(newsUIPagedList);
-	};
 
 	@Override
 	public void onLoadMore() {
@@ -104,23 +101,13 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 
 	@Override
 	public boolean onQueryTextSubmit(String query) {
-		paginate.unbind();
-		newsViewModel.newsPagedListLiveData.removeObserver(pagedListObserver);
-		searchViewModel.newsLiveData.observe(this, pagedListObserver);
-		searchViewModel.searchFor(query);
+		Intent intent = new Intent(this, SearchActivity.class);
+		startActivity(intent);
 		return true;
 	}
 
 	@Override
 	public boolean onQueryTextChange(String newText) {
 		return false;
-	}
-
-	@Override
-	public boolean onClose() {
-		searchViewModel.newsLiveData.removeObserver(pagedListObserver);
-		newsViewModel.newsPagedListLiveData.observe(this, pagedListObserver);
-		paginate = Paginate.with(recyclerView, pagingManger).addLoadingListItem(false).setLoadingTriggerThreshold(50).build();
-		return true;
 	}
 }
