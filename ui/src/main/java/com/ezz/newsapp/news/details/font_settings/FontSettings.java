@@ -17,11 +17,11 @@ public class FontSettings {
 
 	/**
 	 * Use this method to convert percentage value to text size according to the default font range of the app.
-	 * @param textSizePercentage the percentage of text size from (1 - 100).
+	 * @param percentage the percentage of text size from (1 - 100).
 	 */
-	public void setTextSizeBy(int textSizePercentage) {
-		this.textSizePercentage.set(textSizePercentage);
-		this.textSize.set((90 * ((float)(textSizePercentage) / 100)));
+	public void setTextSizeBy(int percentage) {
+		this.textSizePercentage.set(percentage);
+		this.textSize.set((90 * ((float)(percentage) / 100)));
 	}
 
 }

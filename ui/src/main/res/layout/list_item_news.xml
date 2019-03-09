@@ -150,18 +150,29 @@
             android:lines="1"
             android:text="@{news.dateFormatted}"/>
 
-        <ImageView
-            android:id="@+id/news_image"
+        <com.facebook.shimmer.ShimmerFrameLayout
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/date_tv"
-            tools:src="@color/colorAccent"
-            android:transitionName="@string/image_transition"
-            url="@{news.imageUrl}"
-            tools:targetApi="lollipop" />
+            url="@{news.imageUrl}">
+
+
+            <ImageView
+                android:id="@+id/news_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:src="@color/colorAccent"
+                android:transitionName="@string/image_transition"
+                tools:targetApi="lollipop" />
+
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

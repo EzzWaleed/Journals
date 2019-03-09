@@ -5,9 +5,11 @@ import android.widget.ImageView;
 import com.ezz.data.remote.imageloader.ImageLoader;
 import com.ezz.newsapp.R;
 import com.ezz.newsapp.binding_adapter.di.DataBindingScope;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import javax.inject.Inject;
 
+import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 
@@ -26,6 +28,12 @@ public class ImageBindingAdapter {
 
 	@BindingAdapter(value = {"url"})
 	public void loadImage(ImageView imageView, String url){
+		imageLoader.loadImageWithoutProgress(imageView, url, R.color.white, R.color.white);
+	}
+
+	@BindingAdapter(value = {"url"})
+	public void loadImage(ShimmerFrameLayout shimmerFrameLayout, String url, String tag){
+		@Nullable ImageView imageView = shimmerFrameLayout.findViewWithTag(tag);
 		imageLoader.loadImageWithoutProgress(imageView, url, R.color.white, R.color.white);
 	}
 
