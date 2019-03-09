@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -20,6 +22,14 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_news" />
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:id="@+id/news_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/list_item_news"
+        tools:itemCount="6"
+        app:attachItemAnimator="@{true}"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

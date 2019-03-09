@@ -27,12 +27,14 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.core.view.MenuItemCompat;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.recyclerview.animators.FadeInUpAnimator;
 
 public class NewsActivity extends AppCompatActivity implements PagingManger.LoadMoreListener, SearchView.OnQueryTextListener{
 
@@ -58,7 +60,7 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_news);
+		DataBindingUtil.setContentView(this, R.layout.activity_news);
 		ButterKnife.bind(this);
 		setSupportActionBar(toolbar);
 
@@ -91,16 +93,19 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 			pagingManger.setLoading(false);
 		});
 
-
 		newsViewModel.newsPagedListLiveData.observe(this, newsUIPagedList -> newsAdapter.submitList(newsUIPagedList));
 
+		setupRecycler();
+
+		newsAdapter.setClickListener((newsUI, imageView) ->
+		DetailsActivity.startDetailsActivity(this, newsUI, imageView));
+	}
+
+	private void setupRecycler() {
 		recyclerView.setAdapter(newsAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		pagingManger.setPagingKeeper(newsViewModel.getPagingKeeper());
 		Paginate.with(recyclerView, pagingManger).addLoadingListItem(false).setLoadingTriggerThreshold(50).build();
-
-		newsAdapter.setClickListener((newsUI, imageView) ->
-		DetailsActivity.startDetailsActivity(this, newsUI, imageView));
 	}
 
 	@Override

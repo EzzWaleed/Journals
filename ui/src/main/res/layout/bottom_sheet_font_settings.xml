@@ -91,7 +91,7 @@
             app:layout_constraintEnd_toStartOf="@+id/a_big"
             app:layout_constraintStart_toEndOf="@+id/a_small"
             app:layout_constraintTop_toTopOf="parent"
-            android:progress="@{fontSettings.textSizePercentage.get()}"/>
+            android:progress="@{fontSettings.textSizePercentage}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -123,7 +123,7 @@
         segmentedgroup:sc_border_width="2dp"
         segmentedgroup:sc_checked_text_color="@color/white"
         segmentedgroup:sc_tint_color="@color/colorAccent"
-        android:checkedButton="@{fontSettings.textStyle.get() ? @id/popup_aa_segment_dark : @id/popup_aa_segment_light}">
+        android:checkedButton="@{fontSettings.textStyle ? @id/popup_aa_segment_dark : @id/popup_aa_segment_light}">
 
         <RadioButton
             android:id="@+id/popup_aa_segment_dark"

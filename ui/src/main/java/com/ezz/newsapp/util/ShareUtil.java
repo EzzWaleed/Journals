@@ -13,9 +13,6 @@ public class ShareUtil {
 		Intent share = new Intent(android.content.Intent.ACTION_SEND);
 		share.setType("text/plain");
 		share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-
-		// Add data to the intent, the receiving app will decide
-		// what to do with it.
 		share.putExtra(Intent.EXTRA_SUBJECT, newsUI.getTitle());
 		share.putExtra(Intent.EXTRA_TEXT, newsUI.getUrl());
 		context.startActivity(Intent.createChooser(share, "Share link!"));

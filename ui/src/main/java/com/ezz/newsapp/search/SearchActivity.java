@@ -16,11 +16,13 @@ import com.paginate.Paginate;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.recyclerview.animators.FadeInUpAnimator;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,7 +55,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_search);
+		DataBindingUtil.setContentView(this, R.layout.activity_search);
 
 		searchQuery = getIntent().getStringExtra(SEARCH_QUERY_KEY);
 
@@ -75,6 +77,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 		newsAdapter.setClickListener((newsUI, imageView) ->
 		DetailsActivity.startDetailsActivity(this, newsUI, imageView));
 	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

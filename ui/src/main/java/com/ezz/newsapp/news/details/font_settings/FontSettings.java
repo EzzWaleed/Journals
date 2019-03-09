@@ -1,9 +1,7 @@
 package com.ezz.newsapp.news.details.font_settings;
 
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-
-import androidx.databinding.ObservableField;
+import androidx.databinding.ObservableBoolean;
+import androidx.databinding.ObservableFloat;
 import androidx.databinding.ObservableInt;
 
 /**
@@ -11,8 +9,8 @@ import androidx.databinding.ObservableInt;
  */
 public class FontSettings {
 
-	public ObservableField<Float> textSize = new ObservableField<>();
-	public ObservableField<Boolean> textStyle = new ObservableField<>();
+	public ObservableFloat textSize = new ObservableFloat();
+	public ObservableBoolean textStyle = new ObservableBoolean();
 	public ObservableInt textSizePercentage = new ObservableInt();
 
 	/**
