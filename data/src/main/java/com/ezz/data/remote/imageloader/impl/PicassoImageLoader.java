@@ -12,6 +12,8 @@ import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Created by Ezz Waleed on 04,March,2019
@@ -31,14 +33,14 @@ public class PicassoImageLoader implements ImageLoader {
 
 
     @Override
-    public void loadImageWithProgress(final ImageView imageView, final ProgressBar progressBar, String url) {
+    public void loadImageWithProgress(@NonNull final ImageView imageView, final ProgressBar progressBar, @Nullable String url) {
         loadImageWithProgress(imageView, progressBar, url, R.color.transparent, R.color.white);
     }
 
 
 
     @Override
-    public void loadImageWithProgress(final ImageView imageView, final ProgressBar progressBar, String url, int placeHolder, final int error) {
+    public void loadImageWithProgress(@NonNull final ImageView imageView, final ProgressBar progressBar, @Nullable String url, int placeHolder, final int error) {
         if (url == null || url.isEmpty()) {
             imageView.setImageResource(error);
             return;
@@ -60,13 +62,13 @@ public class PicassoImageLoader implements ImageLoader {
 
 
     @Override
-    public void loadImageWithoutProgress(final ImageView imageView, String url) {
+    public void loadImageWithoutProgress(@NonNull final ImageView imageView, @Nullable String url) {
         loadImageWithoutProgress(imageView, url, R.color.transparent, R.color.white);
     }
 
 
     @Override
-    public void loadImageWithoutProgress(final ImageView imageView, String url, int placeHolder, final int error) {
+    public void loadImageWithoutProgress(@NonNull final ImageView imageView, @Nullable String url, int placeHolder, final int error) {
         if (url == null || url.isEmpty()) {
             imageView.setImageResource(error);
             return;
@@ -80,6 +82,31 @@ public class PicassoImageLoader implements ImageLoader {
             @Override
             public void onError(Exception e) {
                 imageView.setImageResource(error);
+            }
+        });
+    }
+
+    @Override
+    public void loadImageWithCallback(@NonNull ImageView imageView, @Nullable String url, @NonNull CallBack callBack) {
+        loadImageWithCallback(imageView, url, callBack, R.color.transparent, R.color.white);
+    }
+
+    @Override
+    public void loadImageWithCallback(@NonNull ImageView imageView, @Nullable String url, @NonNull CallBack callBack, int placeHolder, int error) {
+        if (url == null || url.isEmpty()) {
+            imageView.setImageResource(error);
+            return;
+        }
+        picasso.load(url).placeholder(placeHolder).into(imageView, new Callback() {
+            @Override
+            public void onSuccess() {
+                callBack.onFinishLoading();
+            }
+
+            @Override
+            public void onError(Exception e) {
+                imageView.setImageResource(error);
+                callBack.onFinishLoading();
             }
         });
     }
