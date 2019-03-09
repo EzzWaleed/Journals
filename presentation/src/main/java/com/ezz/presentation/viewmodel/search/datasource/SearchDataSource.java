@@ -63,15 +63,15 @@ public class SearchDataSource extends PageKeyedDataSource<Integer, NewsUI> {
 			.observeOn(observeOn)
 			.subscribe(
 			newsDomainResource -> {
-				PagedCallbackManger.PagedCallbackHandler handler = pagedCallbackManger.createPagedCallbackHandler(newsDomainResource, null);
+				PagedCallbackManger.PagedCallbackHandler handler = pagedCallbackManger.createPagedCallbackHandler(newsDomainResource, params);
 				callback.onResult(handler.getData(), handler.getNextPaggedKey());
 			},
-			throwable -> callback.onResult(new ArrayList<>(), params.key + 1));
+			throwable -> callback.onResult(new ArrayList<>(), params.key - 1));
 
 			addDisposable(disposable);
 		}
 		else {
-			callback.onResult(new ArrayList<>(), params.key + 1);
+			callback.onResult(new ArrayList<>(), params.key - 1);
 		}
 	}
 
@@ -83,15 +83,15 @@ public class SearchDataSource extends PageKeyedDataSource<Integer, NewsUI> {
 			.observeOn(observeOn)
 			.subscribe(
 			newsDomainResource -> {
-				PagedCallbackManger.PagedCallbackHandler handler = pagedCallbackManger.createPagedCallbackHandler(newsDomainResource, null);
-				callback.onResult(handler.getData(), handler.getPreviousPaggedKey());
+				PagedCallbackManger.PagedCallbackHandler handler = pagedCallbackManger.createPagedCallbackHandler(newsDomainResource, params);
+				callback.onResult(handler.getData(), handler.getNextPaggedKey());
 			},
-			throwable -> callback.onResult(new ArrayList<>(), params.key - 1));
+			throwable -> callback.onResult(new ArrayList<>(), params.key + 1));
 
 			addDisposable(disposable);
 		}
 		else {
-			callback.onResult(new ArrayList<>(), params.key - 1);
+			callback.onResult(new ArrayList<>(), params.key + 1);
 		}
 	}
 
