@@ -27,6 +27,8 @@ import javax.inject.Inject;
 
 public class SearchActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
+	public static final String SEARCH_QUERY_KEY = "searchQueryKey";
+
 	@BindView(R.id.search_view)
 	SearchView searchView;
 
@@ -50,6 +52,8 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 		setContentView(R.layout.activity_search);
 		setSupportActionBar(toolbar);
 
+		String searchQuery = getIntent().getStringExtra(SEARCH_QUERY_KEY);
+
 		ButterKnife.bind(this);
 
 		DaggerSearchScreenComponent.builder().
@@ -64,6 +68,8 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 		searchView.setOnQueryTextListener(this);
+		searchView.setQuery(searchQuery, true);
+		searchView.setIconified(false);
 	}
 
 	@Override

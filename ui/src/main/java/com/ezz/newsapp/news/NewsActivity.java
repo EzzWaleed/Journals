@@ -101,9 +101,21 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 
 	@Override
 	public boolean onQueryTextSubmit(String query) {
-		Intent intent = new Intent(this, SearchActivity.class);
-		startActivity(intent);
+		startSearchActivity(query);
+		clearSearchView();
 		return true;
+	}
+
+	private void clearSearchView() {
+		searchView.setQuery("", false);
+		searchView.clearFocus();
+		searchView.setIconified(true);
+	}
+
+	private void startSearchActivity(String query) {
+		Intent intent = new Intent(this, SearchActivity.class);
+		intent.putExtra(SearchActivity.SEARCH_QUERY_KEY, query);
+		startActivity(intent);
 	}
 
 	@Override
