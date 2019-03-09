@@ -16,6 +16,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Created by Ezz Waleed on 05,March,2019
@@ -96,13 +97,13 @@ public class NewsMapperImpl implements NewsMapper {
 	 * @param content {@link NewsRemote} content.
 	 * @return {@link NewsRemote} content after removing extra text.
 	 */
-	private String removeExtraContent(@NonNull String content){
-		if (content.length() > 0)
-		{
+	private String removeExtraContent(@Nullable String content){
+		if (content != null && content.length() > 0) {
 			int endIndex = content.lastIndexOf("…");
-			if (endIndex != -1)
-			{
-				return content.substring(0, endIndex);
+			if (endIndex != -1) {
+				if (endIndex == content.toCharArray().length - 1)
+					return content;
+				return content.substring(0, endIndex + 1);
 			}
 		}
 		return content;
