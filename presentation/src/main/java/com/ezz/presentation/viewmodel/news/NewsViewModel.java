@@ -10,6 +10,7 @@ import com.ezz.domain.usecase.GetNewsUsecase;
 import com.ezz.presentation.mapper.NewsMapper;
 import com.ezz.presentation.model.NewsUI;
 import com.ezz.presentation.viewmodel.BaseViewModel;
+import com.ezz.presentation.viewmodel.news.paging.PagingManger;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -32,15 +33,18 @@ public class NewsViewModel extends BaseViewModel {
 	private GetNewsUsecase newsUsecase;
 	private NewsMapper newsMapper;
 
+	private PagingManger pagingManger;
+
 	public LiveData<PagedList<NewsUI>> newsPagedListLiveData;
 
 	public MutableLiveData<DataStatus> loadNewsStats = new MutableLiveData<>();
 
 	@Inject
-	public NewsViewModel(@Named(value = IO_SCHEDULER) Scheduler subscribeOn, @Named(value = MAIN_THREAD_SCHEDULER) Scheduler observeOn, GetNewsUsecase newsUsecase, NewsMapper newsMapper) {
+	public NewsViewModel(@Named(value = IO_SCHEDULER) Scheduler subscribeOn, @Named(value = MAIN_THREAD_SCHEDULER) Scheduler observeOn, GetNewsUsecase newsUsecase, NewsMapper newsMapper, PagingManger pagingManger) {
 		super(subscribeOn, observeOn);
 		this.newsUsecase = newsUsecase;
 		this.newsMapper = newsMapper;
+		this.pagingManger = pagingManger;
 		newsPagedListLiveData = createNewsPagedList();
 	}
 
@@ -63,6 +67,10 @@ public class NewsViewModel extends BaseViewModel {
 		dataStatus -> loadNewsStats.postValue(dataStatus),
 		throwable -> loadNewsStats.postValue(DataStatus.ERROR),
 		newsUsecase.loadNews(pageNumber));
+	}
+
+	public PagingManger getPagingManger(){
+		return pagingManger;
 	}
 
 }
