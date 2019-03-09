@@ -28,7 +28,7 @@ import android.view.View;
 
 import javax.inject.Inject;
 
-public class SearchActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
+public class SearchActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
 	public static final String SEARCH_QUERY_KEY = "searchQueryKey";
 
@@ -74,7 +74,6 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 
 		newsAdapter.setClickListener((newsUI, imageView) ->
 		DetailsActivity.startDetailsActivity(this, newsUI, imageView));
-
 	}
 
 	@Override
@@ -103,5 +102,4 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 	public boolean onQueryTextChange(String newText) {
 		return false;
 	}
-
 }

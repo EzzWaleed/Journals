@@ -6,4 +6,5 @@
     <color name="color_bg_white_dark">#60EBEBEB</color>
     <color name="color_black">#000</color>
     <color name="whiteRippleOldApi">#42ffffff</color>
+    <color name="color_divider">#DBDBDB</color>
 </resources>

@@ -7,6 +7,9 @@
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener"/>
+        <variable
+            name="fontSettings"
+            type="com.ezz.newsapp.news.details.font_settings.FontSettings"/>
     </data>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -29,10 +32,23 @@
 
             <ImageButton
                 android:id="@+id/share_btn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_share_black_24dp"
                 app:tint="@color/white"
+                android:background="#00FFFFFF"
+                android:layout_gravity="end"
+                android:layout_marginEnd="16dp"
+                android:padding="5dp"
+                android:scaleType="fitCenter"
+                android:onClick="onClick"
+                android:foreground="@drawable/ripple_round"/>
+
+            <ImageButton
+                android:id="@+id/font_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_font_download_black_24dp"
                 android:background="#00FFFFFF"
                 android:layout_gravity="end"
                 android:layout_marginEnd="16dp"
@@ -118,8 +134,8 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="16dp"
                 android:textColor="@color/color_black"
-                android:textSize="14sp"
-                android:maxLines="2"
+                android:textSize="@{fontSettings.textSize}"
+                android:typeface="@{fontSettings.textStyle}"
                 tools:text="@tools:sample/backgrounds/scenic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -149,9 +165,11 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
+                android:textSize="@{fontSettings.textSize}"
+                android:typeface="@{fontSettings.textStyle}"
                 tools:text="@tools:sample/lorem/random"
+                android:textColor="@color/color_black"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/news_image"
                 android:text="@{news.content}"/>
@@ -168,13 +186,14 @@
                 android:text="@string/continue_on_website"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="@{fontSettings.textSize}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/content_tv"
                 android:onClick="onClick"
-                android:foreground="@drawable/ripple_btn"/>
+                android:foreground="@drawable/ripple_btn"
+                />
 
             <TextView
                 android:id="@+id/date_tv"
@@ -183,7 +202,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="8dp"
-                android:textSize="12sp"
+                android:textSize="@{fontSettings.textSize}"
+                android:typeface="@{fontSettings.textStyle}"
+
                 android:textColor="@color/color_black"
                 tools:text="@tools:sample/date/ddmmyy"
                 app:layout_constraintEnd_toEndOf="parent"

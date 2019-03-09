@@ -50,6 +50,8 @@ dependencies {
     implementation 'com.github.markomilos:paginate:0.5.1'
     // ViewModel + LiveData
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    //Segment controller
+    implementation 'info.hoang8f:android-segmented:1.0.6'
 
 
     testImplementation 'junit:junit:4.12'

@@ -76,8 +76,11 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 					break;
 				case ERROR:
 					pagingManger.setLoadedAllItems(true);
-					Snackbar.make(recyclerView, getString(R.string.error_occured_message), Snackbar.LENGTH_LONG)
-					.setAction("Retry", v -> pagingManger.setLoadedAllItems(false)).show();
+					Snackbar.make(recyclerView, getString(R.string.error_occured_message), Snackbar.LENGTH_INDEFINITE)
+					.setAction("Retry", v -> {
+						loadNext();
+						pagingManger.setLoadedAllItems(false);
+					}).show();
 					break;
 				case HAS_LOADED_ALL_ITEMS:
 					pagingManger.setLoadedAllItems(true);
@@ -114,6 +117,10 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 
 	@Override
 	public void onLoadMore() {
+		loadNext();
+	}
+
+	private void loadNext() {
 		pagingManger.setLoading(true);
 		newsViewModel.loadNews(pagingManger.getPageNumber());
 	}
