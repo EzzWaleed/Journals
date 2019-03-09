@@ -11,7 +11,7 @@ import retrofit2.http.Query;
  */
 public interface NewsAPI {
 	@GET("top-headlines")
-	Single<NewsResponse> requestTopHeadlines(@Query("page") Integer pageNumber);
+	Single<NewsResponse> requestTopHeadlines(@Query("page") Integer pageNumber, @Query("country") String countryISO2);
 
 	@GET("everything")
 	Single<NewsResponse> searchForNews(@Query("q") String query, @Query("page") Integer pageNumber);
