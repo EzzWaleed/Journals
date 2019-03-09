@@ -48,7 +48,7 @@ public class NewsMapperImpl implements NewsMapper {
 	public NewsDomain mapToDomain(@NonNull NewsRemote newsRemote) {
 		NewsDomain newsDomain = new NewsDomain();
 		newsDomain.setAuthorName(newsRemote.getAuthor());
-		newsDomain.setContent(newsRemote.getContent());
+		newsDomain.setContent(removeExtraContent(newsRemote.getContent()));
 		newsDomain.setDescription(newsRemote.getDescription());
 		newsDomain.setImageUrl(newsRemote.getUrlToImage());
 		newsDomain.setPublishedDate(convertToTime(newsRemote.getPublishedAt()));
@@ -80,7 +80,7 @@ public class NewsMapperImpl implements NewsMapper {
 	public NewsLocal mapToLocal(@NonNull NewsRemote newsRemote) {
 		NewsLocal newsLocal = new NewsLocal();
 		newsLocal.authorName = newsRemote.getAuthor();
-		newsLocal.content = newsRemote.getContent();
+		newsLocal.content = removeExtraContent(newsRemote.getContent());
 		newsLocal.description = newsRemote.getDescription();
 		newsLocal.imageUrl = newsRemote.getUrlToImage();
 		newsLocal.publishedDate = convertToTime(newsRemote.getPublishedAt());
@@ -88,6 +88,24 @@ public class NewsMapperImpl implements NewsMapper {
 		newsLocal.title = newsRemote.getTitle();
 		newsLocal.url = newsRemote.getUrl();
 		return newsLocal;
+	}
+
+	/**
+	 * Removes extra string at the of {@link NewsRemote} content.
+	 * Extra content looks like (de…[+1119 chars])
+	 * @param content {@link NewsRemote} content.
+	 * @return {@link NewsRemote} content after removing extra text.
+	 */
+	private String removeExtraContent(@NonNull String content){
+		if (content.length() > 0)
+		{
+			int endIndex = content.lastIndexOf("…");
+			if (endIndex != -1)
+			{
+				return content.substring(0, endIndex);
+			}
+		}
+		return content;
 	}
 
 	@Override
