@@ -41,7 +41,7 @@ public class SearchViewModel extends ViewModel {
 
 	MutableLiveData<PagedList<NewsUI>> newsLiveData = new MutableLiveData<>();
 
-	LiveData<PagedList<NewsUI>> dataSourceFactoryLiveData;
+	private LiveData<PagedList<NewsUI>> dataSourceFactoryLiveData;
 
 	@Inject
 	public SearchViewModel(@Named(value = IO_SCHEDULER) Scheduler subscribeOn, @Named(value = MAIN_THREAD_SCHEDULER) Scheduler observeOn, SearchNewsUsecase searchNewsUsecase, NewsMapper newsMapper) {
