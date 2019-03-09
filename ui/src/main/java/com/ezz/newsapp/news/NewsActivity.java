@@ -7,7 +7,7 @@ import com.ezz.newsapp.App;
 import com.ezz.newsapp.R;
 import com.ezz.newsapp.news.adapter.NewsAdapter;
 import com.ezz.newsapp.news.di.DaggerNewsScreenComponent;
-import com.ezz.newsapp.paging.PagingManger;
+import com.ezz.newsapp.news.paging.PagingManger;
 import com.ezz.newsapp.search.SearchActivity;
 import com.ezz.presentation.model.NewsUI;
 import com.ezz.presentation.viewmodel.news.NewsViewModel;
@@ -89,6 +89,7 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 
 		recyclerView.setAdapter(newsAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
+		pagingManger.setPagingKeeper(newsViewModel.getPagingKeeper());
 		Paginate.with(recyclerView, pagingManger).addLoadingListItem(false).setLoadingTriggerThreshold(50).build();
 	}
 

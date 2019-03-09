@@ -1,7 +1,8 @@
 package com.ezz.newsapp.news.di;
 
 import com.ezz.newsapp.news.NewsActivity;
-import com.ezz.newsapp.paging.PagingManger;
+
+import com.ezz.newsapp.news.paging.PagingManger;
 import com.ezz.presentation.di.PresentationComponent;
 
 import dagger.BindsInstance;

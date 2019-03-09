@@ -1,10 +1,12 @@
-package com.ezz.newsapp.paging;
+package com.ezz.newsapp.news.paging;
 
+import com.ezz.presentation.viewmodel.news.paging.PagingKeeper;
 import com.paginate.Paginate;
 
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Created by Ezz Waleed on 08,March,2019
@@ -15,11 +17,10 @@ import androidx.annotation.NonNull;
  */
 public class PagingManger implements Paginate.Callbacks {
 
-	private int pageNumber = 1;
+	private PagingKeeper pagingKeeper;
 
-	private boolean loading = false;
-	private boolean loadedAllItems = false;
 	private LoadMoreListener loadMoreListener;
+
 
 	@Inject
 	public PagingManger(@NonNull LoadMoreListener loadMoreListener) {
@@ -33,20 +34,20 @@ public class PagingManger implements Paginate.Callbacks {
 
 	@Override
 	public boolean isLoading() {
-		return loading;
+		return pagingKeeper.isLoading();
 	}
 
 	@Override
 	public boolean hasLoadedAllItems() {
-		return loadedAllItems;
+		return pagingKeeper.isLoadedAllItems();
 	}
 
 	public void setLoading(boolean loading) {
-		this.loading = loading;
+		this.pagingKeeper.setLoading(loading);
 	}
 
 	public void setLoadedAllItems(boolean loadedAllItems) {
-		this.loadedAllItems = loadedAllItems;
+		this.pagingKeeper.setLoadedAllItems(loadedAllItems);
 	}
 
 	public interface LoadMoreListener{
@@ -54,10 +55,14 @@ public class PagingManger implements Paginate.Callbacks {
 	}
 
 	public int getPageNumber() {
-		return pageNumber;
+		return pagingKeeper.getPageNumber();
 	}
 
 	public void incrementPageNumber(){
-		pageNumber++;
+		pagingKeeper.incrementPage();
+	}
+
+	public void setPagingKeeper(@Nullable PagingKeeper pagingKeeper) {
+		this.pagingKeeper = pagingKeeper;
 	}
 }
