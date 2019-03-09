@@ -60,9 +60,7 @@ public class SearchViewModel extends ViewModel {
 		dataSourceFactoryLiveData.observeForever(pagedListObserver);
 	}
 
-	private Observer<PagedList<NewsUI>> pagedListObserver = newsUIPagedList -> {
-		newsLiveData.setValue(newsUIPagedList);
-	};
+	private Observer<PagedList<NewsUI>> pagedListObserver = newsUIPagedList -> newsLiveData.setValue(newsUIPagedList);
 
 
 	@Override
