@@ -66,7 +66,6 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 
 		searchView.setOnQueryTextListener(this);
 
-		newsViewModel.newsPagedListLiveData.observe(this, pagedListObserver);
 
 		newsViewModel.loadNewsStats.observe(this, dataStatus -> {
 			switch (dataStatus){
@@ -108,6 +107,7 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 		paginate.unbind();
 		newsViewModel.newsPagedListLiveData.removeObserver(pagedListObserver);
 		searchViewModel.newsLiveData.observe(this, pagedListObserver);
+		searchViewModel.searchFor(query);
 		return true;
 	}
 
