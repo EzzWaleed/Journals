@@ -1,6 +1,5 @@
 package com.ezz.presentation.viewmodel.news;
 
-
 import com.ezz.data.remote.client.SettingsAPI;
 import com.ezz.domain.entity.NewsDomain;
 import com.ezz.domain.resource.DataStatus;
@@ -34,10 +33,8 @@ public class NewsViewModel extends BaseViewModel {
 	private NewsMapper newsMapper;
 	private PagingKeeper pagingKeeper;
 
-
-	public LiveData<PagedList<NewsUI>> newsPagedListLiveData;
-
-	public MutableLiveData<DataStatus> loadNewsStats = new MutableLiveData<>();
+	private LiveData<PagedList<NewsUI>> newsPagedListLiveData;
+	private MutableLiveData<DataStatus> loadNewsStats = new MutableLiveData<>();
 
 	@Inject
 	public NewsViewModel(@Named(value = IO_SCHEDULER) Scheduler subscribeOn, @Named(value = MAIN_THREAD_SCHEDULER) Scheduler observeOn, GetNewsUsecase newsUsecase, NewsMapper newsMapper, PagingKeeper pagingKeeper) {
@@ -51,7 +48,7 @@ public class NewsViewModel extends BaseViewModel {
 	 * Creates a paged list of {@link NewsUI} as a stream of LiveData,
 	 * and assign it to newsPagedListLiveData variable if it not already assigned.
 	 */
-	public void createNewsPagedList(){
+	public void createNewsPagedList() {
 		if (newsPagedListLiveData == null) {
 			DataSource.Factory<Integer, NewsUI> dataSourceFactory =
 			newsUsecase.getNewsPagedList().map((NewsDomain newsDomain) -> newsMapper.mapToUI(newsDomain));
@@ -63,15 +60,27 @@ public class NewsViewModel extends BaseViewModel {
 		}
 	}
 
-	public void loadNews(int pageNumber){
+	/**
+	 * loads news data according to the requested page number.
+	 *
+	 * @param pageNumber requested page number to be loaded
+	 */
+	public void loadNews(int pageNumber) {
 		execute(loading -> loadNewsStats.postValue(DataStatus.LOADING),
 		dataStatus -> loadNewsStats.postValue(dataStatus),
 		throwable -> loadNewsStats.postValue(DataStatus.ERROR),
 		newsUsecase.loadNews(pageNumber));
 	}
 
+	public LiveData<PagedList<NewsUI>> getNewsPagedListLiveData() {
+		return newsPagedListLiveData;
+	}
+
+	public LiveData<DataStatus> getLoadNewsStats() {
+		return loadNewsStats;
+	}
+
 	public PagingKeeper getPagingKeeper() {
 		return pagingKeeper;
 	}
-
 }
