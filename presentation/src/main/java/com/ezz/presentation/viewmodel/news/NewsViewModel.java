@@ -45,21 +45,22 @@ public class NewsViewModel extends BaseViewModel {
 		this.newsUsecase = newsUsecase;
 		this.newsMapper = newsMapper;
 		this.pagingKeeper = pagingKeeper;
-		newsPagedListLiveData = createNewsPagedList();
 	}
 
 	/**
-	 * Creates a paged list of {@link NewsUI} as a stream of LiveData.
-	 * @return the created instance of pagedList as a stream of LiveData.
+	 * Creates a paged list of {@link NewsUI} as a stream of LiveData,
+	 * and assign it to newsPagedListLiveData variable if it not already assigned.
 	 */
-	private LiveData<PagedList<NewsUI>> createNewsPagedList(){
-		DataSource.Factory<Integer, NewsUI> dataSourceFactory =
-		newsUsecase.getNewsPagedList().map((NewsDomain newsDomain) -> newsMapper.mapToUI(newsDomain));
+	private void createNewsPagedList(){
+		if (newsPagedListLiveData == null) {
+			DataSource.Factory<Integer, NewsUI> dataSourceFactory =
+			newsUsecase.getNewsPagedList().map((NewsDomain newsDomain) -> newsMapper.mapToUI(newsDomain));
 
-		PagedList.Config config = new PagedList.Config.Builder()
-		.setPageSize(SettingsAPI.getNumberOfItemsPerPage()).build();
+			PagedList.Config config = new PagedList.Config.Builder()
+			.setPageSize(SettingsAPI.getNumberOfItemsPerPage()).build();
 
-		return new LivePagedListBuilder<>(dataSourceFactory, config).build();
+			newsPagedListLiveData = new LivePagedListBuilder<>(dataSourceFactory, config).build();
+		}
 	}
 
 	public void loadNews(int pageNumber){
