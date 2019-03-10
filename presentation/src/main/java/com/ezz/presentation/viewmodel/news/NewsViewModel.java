@@ -51,7 +51,7 @@ public class NewsViewModel extends BaseViewModel {
 	 * Creates a paged list of {@link NewsUI} as a stream of LiveData,
 	 * and assign it to newsPagedListLiveData variable if it not already assigned.
 	 */
-	private void createNewsPagedList(){
+	public void createNewsPagedList(){
 		if (newsPagedListLiveData == null) {
 			DataSource.Factory<Integer, NewsUI> dataSourceFactory =
 			newsUsecase.getNewsPagedList().map((NewsDomain newsDomain) -> newsMapper.mapToUI(newsDomain));
