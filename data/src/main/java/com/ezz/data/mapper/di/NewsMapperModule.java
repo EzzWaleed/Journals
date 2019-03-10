@@ -1,7 +1,11 @@
 package com.ezz.data.mapper.di;
 
-import com.ezz.data.mapper.NewsMapper;
-import com.ezz.data.mapper.NewsMapperImpl;
+import com.ezz.data.mapper.DataStatusMapper;
+import com.ezz.data.mapper.DomainMapper;
+import com.ezz.data.mapper.LocalMapper;
+import com.ezz.data.mapper.impl.DataStatusMapperImpl;
+import com.ezz.data.mapper.impl.DomainMapperImpl;
+import com.ezz.data.mapper.impl.LocalMapperImpl;
 
 import dagger.Binds;
 import dagger.Module;
@@ -12,5 +16,11 @@ import dagger.Module;
 @Module
 public interface NewsMapperModule {
 	@Binds
-	NewsMapper provideNewsMapper(NewsMapperImpl newsMapperImpl);
+	DomainMapper bindDomainMapper(DomainMapperImpl domainMapperImpl);
+
+	@Binds
+	LocalMapper bindLocalMapper(LocalMapperImpl localMapperImpl);
+
+	@Binds
+	DataStatusMapper bindDataStatusMapper(DataStatusMapperImpl dataStatusMapperImpl);
 }
