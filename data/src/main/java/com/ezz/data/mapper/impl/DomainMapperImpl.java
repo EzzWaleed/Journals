@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -18,6 +20,10 @@ import androidx.annotation.Nullable;
  * Created by Ezz Waleed on 10,March,2019
  */
 public class DomainMapperImpl implements DomainMapper {
+
+	@Inject
+	public DomainMapperImpl() {
+	}
 
 	@Override
 	public NewsDomain mapLocalToDomain(@NonNull NewsLocal newsLocal) {

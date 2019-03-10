@@ -7,6 +7,8 @@ import com.ezz.domain.entity.NewsDomain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import androidx.annotation.NonNull;
 
 /**
@@ -14,6 +16,9 @@ import androidx.annotation.NonNull;
  */
 public class LocalMapperImpl implements LocalMapper {
 
+	@Inject
+	public LocalMapperImpl() {
+	}
 
 	@Override
 	public NewsLocal mapDomainToLocal(@NonNull NewsDomain newsDomain) {

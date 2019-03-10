@@ -5,6 +5,8 @@ import com.ezz.data.remote.client.SettingsAPI;
 import com.ezz.data.remote.model.NewsResponse;
 import com.ezz.domain.resource.DataStatus;
 
+import javax.inject.Inject;
+
 import androidx.annotation.NonNull;
 
 /**
@@ -12,8 +14,12 @@ import androidx.annotation.NonNull;
  */
 public class DataStatusMapperImpl implements DataStatusMapper {
 
+	@Inject
+	public DataStatusMapperImpl() {
+	}
+
 	@Override
-	public DataStatus mapNewsRresponseToDataStatus(@NonNull NewsResponse newsResponse, @NonNull Integer pageNumber) {
+	public DataStatus mapNewsResponseToDataStatus(@NonNull NewsResponse newsResponse, @NonNull Integer pageNumber) {
 		switch (SettingsAPI.NetworkStatus.valueOf(newsResponse.getStatus())) {
 			case ok:
 				if (isLastPage(newsResponse, pageNumber))

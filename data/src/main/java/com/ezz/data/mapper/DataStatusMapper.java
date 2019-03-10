@@ -15,5 +15,5 @@ public interface DataStatusMapper {
 	 * @param pageNumber response page number
 	 * @return mapping result
 	 */
-	DataStatus mapNewsRresponseToDataStatus(@NonNull NewsResponse newsResponse, @NonNull Integer pageNumber);
+	DataStatus mapNewsResponseToDataStatus(@NonNull NewsResponse newsResponse, @NonNull Integer pageNumber);
 }

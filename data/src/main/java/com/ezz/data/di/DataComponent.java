@@ -21,14 +21,7 @@ import dagger.Component;
 @Component(modules = {NetworkModule.class, ImageLoaderModule.class, DatabaseModule.class, NewsMapperModule.class, RepositoryModule.class})
 @DataScope
 public interface DataComponent {
-	NewsAPI newsAPI();
-
-	ImageLoader imageLoader();
-
-	NewsDao newsDao();
-
-	NewsMapper newsMapper();
-
+	
 	NewsRepository newsRepository();
 
 	@Component.Builder

@@ -19,8 +19,8 @@ public interface NewsMapperModule {
 	DomainMapper bindDomainMapper(DomainMapperImpl domainMapperImpl);
 
 	@Binds
-	LocalMapper bindDomainMapper(LocalMapperImpl localMapperImpl);
+	LocalMapper bindLocalMapper(LocalMapperImpl localMapperImpl);
 
 	@Binds
-	DataStatusMapper bindDomainMapper(DataStatusMapperImpl dataStatusMapperImpl);
+	DataStatusMapper bindDataStatusMapper(DataStatusMapperImpl dataStatusMapperImpl);
 }
