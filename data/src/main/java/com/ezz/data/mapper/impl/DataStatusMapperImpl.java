@@ -48,7 +48,6 @@ public class DataStatusMapperImpl implements DataStatusMapper {
 	private boolean isLastPage(@NonNull NewsResponse newsResponse, @NonNull Integer pageNumber) {
 		double lastPageNumber = Math.ceil(newsResponse.getTotalResults().doubleValue()
 		/ SettingsAPI.getNumberOfItemsPerPage().doubleValue());
-
 		return pageNumber.doubleValue() == lastPageNumber;
 	}
 
