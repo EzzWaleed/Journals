@@ -27,14 +27,14 @@ public class DataStatusMapperImpl implements DataStatusMapper {
 				return DataStatus.SUCCESS;
 			case error:
 				switch (SettingsAPI.NetworkCodes.valueOf(newsResponse.getCode())) {
-					case apiKeyInvalid:
-						return DataStatus.ERROR;
 					case maximumResultsReached:
 						return DataStatus.HAS_LOADED_ALL_ITEMS;
+						default:
+							return DataStatus.ERROR;
 				}
-				break;
+				default:
+					return DataStatus.ERROR;
 		}
-		return null;
 	}
 
 
@@ -48,7 +48,6 @@ public class DataStatusMapperImpl implements DataStatusMapper {
 	private boolean isLastPage(@NonNull NewsResponse newsResponse, @NonNull Integer pageNumber) {
 		double lastPageNumber = Math.ceil(newsResponse.getTotalResults().doubleValue()
 		/ SettingsAPI.getNumberOfItemsPerPage().doubleValue());
-
 		return pageNumber.doubleValue() == lastPageNumber;
 	}
 
