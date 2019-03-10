@@ -24,6 +24,8 @@ public interface DataComponent {
 	
 	NewsRepository newsRepository();
 
+	ImageLoader imageLoader();
+
 	@Component.Builder
 	interface Builder {
 
