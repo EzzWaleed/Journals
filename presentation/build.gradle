@@ -42,11 +42,16 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.1.14'
     // ViewModel + LiveData
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.0.0"
+    implementation "androidx.lifecycle:lifecycle-livedata:2.0.0"
     // Dagger
     implementation 'com.google.dagger:dagger:2.21'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
+    //testing
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    testImplementation 'com.android.support.test:runner:1.0.2'
+    testImplementation "androidx.arch.core:core-testing:2.0.0"
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     testImplementation 'org.mockito:mockito-core:2.25.0'
     implementation project(':domain')

@@ -6,7 +6,7 @@ import com.ezz.data.remote.model.NewsRemote;
 import com.ezz.data.remote.model.SourceRemote;
 import com.ezz.domain.entity.NewsDomain;
 
-import org.junit.After;
+
 import org.junit.Before;
 import org.junit.Test;
 

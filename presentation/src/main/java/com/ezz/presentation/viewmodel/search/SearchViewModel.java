@@ -1,5 +1,6 @@
 package com.ezz.presentation.viewmodel.search;
 
+import com.ezz.data.repository.NewsRepositoryImpl;
 import com.ezz.domain.resource.Resource;
 import com.ezz.domain.usecase.SearchNewsUsecase;
 import com.ezz.presentation.mapper.NewsMapper;
