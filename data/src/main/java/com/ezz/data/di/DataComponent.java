@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.ezz.data.local.dao.NewsDao;
 import com.ezz.data.local.di.DatabaseModule;
-import com.ezz.data.mapper.NewsMapper;
 import com.ezz.data.mapper.di.NewsMapperModule;
 import com.ezz.data.remote.client.NewsAPI;
 import com.ezz.data.remote.di.ImageLoaderModule;
@@ -15,7 +14,6 @@ import com.ezz.domain.repository.NewsRepository;
 
 import dagger.BindsInstance;
 import dagger.Component;
-import retrofit2.Retrofit;
 
 /**
  * Created by Ezz Waleed on 04,March,2019
