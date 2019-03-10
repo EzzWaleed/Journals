@@ -89,5 +89,4 @@ public interface NewsMapper {
      */
     Resource<List<NewsDomain>> mapToNewsDomainResource(@NonNull NewsResponse newsResponse, @NonNull Integer pageNumber);
 
-
 }

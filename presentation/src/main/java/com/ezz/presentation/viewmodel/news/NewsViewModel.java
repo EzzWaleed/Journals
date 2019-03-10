@@ -53,6 +53,7 @@ public class NewsViewModel extends BaseViewModel {
 	 * @return the created instance of pagedList as a stream of LiveData.
 	 */
 	private LiveData<PagedList<NewsUI>> createNewsPagedList(){
+
 		DataSource.Factory<Integer, NewsUI> dataSourceFactory =
 		newsUsecase.getNewsPagedList().map((NewsDomain newsDomain) -> newsMapper.mapToUI(newsDomain));
 

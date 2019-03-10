@@ -32,7 +32,7 @@ public class NewsMapperImpl implements NewsMapper {
 	}
 
 	@Override
-	public NewsDomain mapToDomain(NewsLocal newsLocal) {
+	public NewsDomain mapToDomain(@NonNull NewsLocal newsLocal) {
 		NewsDomain newsDomain = new NewsDomain();
 		newsDomain.setAuthorName(newsLocal.authorName);
 		newsDomain.setContent(newsLocal.content);

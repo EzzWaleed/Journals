@@ -32,4 +32,5 @@ public class SearchNewsUsecase {
     public Observable<Resource<List<NewsDomain>>> searchNews(String query, Integer pageNumber){
         return newsRepository.searchNews(query, pageNumber);
     }
+
 }
