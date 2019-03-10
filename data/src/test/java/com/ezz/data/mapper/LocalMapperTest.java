@@ -24,7 +24,7 @@ public class LocalMapperTest {
 	private LocalMapper localMapper;
 
 	@Before
-	public void init(){
+	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 		initNewsFields();
 		localMapper = new LocalMapperImpl();
