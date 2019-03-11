@@ -1,11 +1,10 @@
 package com.ezz.newsapp.news;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 
+import com.ezz.domain.resource.DataStatus;
 import com.ezz.newsapp.App;
 import com.ezz.newsapp.R;
 import com.ezz.newsapp.news.adapter.NewsAdapter;
@@ -26,17 +25,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 
-import androidx.core.view.MenuItemCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import jp.wasabeef.recyclerview.animators.FadeInUpAnimator;
 
-public class NewsActivity extends AppCompatActivity implements PagingManger.LoadMoreListener, SearchView.OnQueryTextListener{
+public class NewsActivity extends AppCompatActivity implements PagingManger.LoadMoreListener, SearchView.OnQueryTextListener {
 
 	@Inject
 	NewsAdapter newsAdapter;
@@ -56,7 +54,6 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 
 	NewsViewModel newsViewModel;
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -71,29 +68,11 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 
 		newsViewModel = ViewModelProviders.of(this, viewModelFactory).get(NewsViewModel.class);
 
-		newsViewModel.loadNewsStats.observe(this, dataStatus -> {
-			switch (dataStatus){
-				case SUCCESS:
-					pagingManger.incrementPageNumber();
-					break;
-				case ERROR:
-					pagingManger.setLoadedAllItems(true);
-					Snackbar.make(recyclerView, getString(R.string.error_occured_message), Snackbar.LENGTH_INDEFINITE)
-					.setAction("Retry", v -> {
-						loadNext();
-						pagingManger.setLoadedAllItems(false);
-					}).show();
-					break;
-				case HAS_LOADED_ALL_ITEMS:
-					pagingManger.setLoadedAllItems(true);
-					break;
-				case LOADING:
-					return;
-			}
-			pagingManger.setLoading(false);
-		});
+		newsViewModel.createNewsPagedList();
 
-		newsViewModel.newsPagedListLiveData.observe(this, newsUIPagedList -> newsAdapter.submitList(newsUIPagedList));
+		newsViewModel.getNewsPagedListLiveData().observe(this, newsUIPagedList -> newsAdapter.submitList(newsUIPagedList));
+
+		newsViewModel.getLoadNewsStats().observe(this, dataStatusObserver);
 
 		setupRecycler();
 
@@ -110,22 +89,18 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		setupSearchView(menu);
-		return true;
-	}
-
-	private void setupSearchView(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_main, menu);
 		searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
 		searchView.setOnQueryTextListener(this);
+		return true;
 	}
 
 	@Override
 	public void onLoadMore() {
-		loadNext();
+		loadNextPage();
 	}
 
-	private void loadNext() {
+	private void loadNextPage() {
 		pagingManger.setLoading(true);
 		newsViewModel.loadNews(pagingManger.getPageNumber());
 	}
@@ -150,7 +125,27 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 		startActivity(intent);
 	}
 
-
+	Observer<DataStatus> dataStatusObserver = dataStatus -> {
+		switch (dataStatus) {
+			case SUCCESS:
+				pagingManger.incrementPageNumber();
+				break;
+			case ERROR:
+				pagingManger.setLoadedAllItems(true);
+				Snackbar.make(recyclerView, getString(R.string.error_occured_message), Snackbar.LENGTH_INDEFINITE)
+				.setAction("Retry", v -> {
+					loadNextPage();
+					pagingManger.setLoadedAllItems(false);
+				}).show();
+				break;
+			case HAS_LOADED_ALL_ITEMS:
+				pagingManger.setLoadedAllItems(true);
+				break;
+			case LOADING:
+				return;
+		}
+		pagingManger.setLoading(false);
+	};
 
 	@Override
 	public boolean onQueryTextChange(String newText) {

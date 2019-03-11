@@ -1,10 +1,12 @@
 package com.ezz.presentation.viewmodel.search.datasource;
 
+import com.ezz.domain.resource.DataStatus;
 import com.ezz.domain.usecase.SearchNewsUsecase;
 import com.ezz.presentation.mapper.NewsMapper;
 import com.ezz.presentation.model.NewsUI;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.paging.DataSource;
 import io.reactivex.Scheduler;
 
@@ -27,6 +29,10 @@ public class SearchDataSourceFactory extends DataSource.Factory<Integer, NewsUI>
 
 	public void dispose(){
 		searchDataSource.dispose();
+	}
+
+	public LiveData<DataStatus> getDataStatusLiveData(){
+		return searchDataSource.getDataStatusLiveData();
 	}
 
 }

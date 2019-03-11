@@ -2,8 +2,10 @@ package com.ezz.newsapp.search;
 
 import android.os.Bundle;
 
+import com.ezz.domain.resource.DataStatus;
 import com.ezz.newsapp.App;
 import com.ezz.newsapp.R;
+import com.ezz.newsapp.databinding.ActivitySearchBinding;
 import com.ezz.newsapp.news.adapter.NewsAdapter;
 import com.ezz.newsapp.news.details.DetailsActivity;
 import com.ezz.newsapp.search.di.DaggerSearchScreenComponent;
@@ -17,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,14 +51,14 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 	@Inject
 	NewsAdapter newsAdapter;
 
-	SearchViewModel searchViewModel;
+	private SearchViewModel searchViewModel;
 
 	private String searchQuery;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		DataBindingUtil.setContentView(this, R.layout.activity_search);
+		ActivitySearchBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_search);
 
 		searchQuery = getIntent().getStringExtra(SEARCH_QUERY_KEY);
 
@@ -69,7 +72,9 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 
 		searchViewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchViewModel.class);
 
-		searchViewModel.newsLiveData.observe(this, newsUIPagedList -> newsAdapter.submitList(newsUIPagedList));
+		binding.setViewModel(searchViewModel);
+
+		searchViewModel.getNewsLiveData().observe(this, newsUIPagedList -> newsAdapter.submitList(newsUIPagedList));
 
 		recyclerView.setAdapter(newsAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
