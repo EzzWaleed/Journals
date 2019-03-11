@@ -6,10 +6,12 @@ import com.ezz.domain.repository.NewsRepository;
 
 import javax.inject.Inject;
 
-import androidx.lifecycle.LiveData;
+
 import androidx.paging.DataSource;
-import androidx.paging.LivePagedListBuilder;
+
 import androidx.paging.PagedList;
+import androidx.paging.RxPagedListBuilder;
+import io.reactivex.Observable;
 
 /**
  * Created by Ezz Waleed on 04,March,2019
@@ -30,9 +32,9 @@ public class SearchNewsUseCase<T> {
      * @param query the requested search query
      * @return requested pagedList.
      */
-    public LiveData<PagedList<T>> getSearchPagedList(String query){
+    public Observable<PagedList<T>> getSearchPagedList(String query){
         DataSource.Factory<Integer, T> dataSourceFactory = mapper.map(newsRepository.getSearchNewsDataSource(query));
-        return new LivePagedListBuilder<>(dataSourceFactory, 10).build();
+        return new RxPagedListBuilder<>(dataSourceFactory, 10).buildObservable();
     }
 
 

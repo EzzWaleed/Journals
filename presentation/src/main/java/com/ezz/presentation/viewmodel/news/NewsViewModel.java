@@ -7,6 +7,7 @@ import com.ezz.domain.usecase.GetNewsUseCase;
 import com.ezz.presentation.model.NewsUI;
 import com.ezz.presentation.viewmodel.BaseViewModel;
 import com.ezz.presentation.viewmodel.news.paging.PagingState;
+import com.ezz.presentation.viewmodel.util.SingleLiveEvent;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -28,7 +29,7 @@ public class NewsViewModel extends BaseViewModel {
 	private PagingState pagingState;
 
 	private MutableLiveData<PagedList<NewsUI>> newsPagedListLiveData = new MutableLiveData<>();
-	private MutableLiveData<DataStatus> loadNewsStats = new MutableLiveData<>();
+	private SingleLiveEvent<DataStatus> loadNewsStats = new SingleLiveEvent<>();
 
 	private MutableLiveData<DataStatus> pagingDataStatus = new MutableLiveData<>();
 
@@ -37,13 +38,15 @@ public class NewsViewModel extends BaseViewModel {
 		super(subscribeOn, observeOn);
 		this.newsUseCase = newsUsecase;
 		this.pagingState = pagingState;
+		//create news paged list
+		createNewsPagedList();
 	}
 
 	/**
 	 * Creates a paged list of {@link NewsUI} as a stream of LiveData,
 	 * and assign it to newsPagedListLiveData variable if it not already assigned.
 	 */
-	public void createNewsPagedList() {
+	private void createNewsPagedList() {
 		execute(
 		disposable -> pagingDataStatus.postValue(DataStatus.LOADING),
 		newsUIPagedList -> {
@@ -71,7 +74,7 @@ public class NewsViewModel extends BaseViewModel {
 		return newsPagedListLiveData;
 	}
 
-	public LiveData<DataStatus> getLoadNewsStats() {
+	public SingleLiveEvent<DataStatus> getLoadNewsStats() {
 		return loadNewsStats;
 	}
 

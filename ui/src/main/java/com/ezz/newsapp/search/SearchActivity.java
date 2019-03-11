@@ -58,27 +58,36 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		DataBindingUtil.setContentView(this, R.layout.activity_search);
+		ActivitySearchBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_search);
 
 		ButterKnife.bind(this);
 
 		setSupportActionBar(toolbar);
 
+		//dagger setup
 		DaggerSearchScreenComponent.builder()
 		.presentationComponent(App.getPresentationComponent(this))
 		.build().inject(this);
 
 		searchViewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchViewModel.class);
 
+		//data binding setup
+		binding.setVm(searchViewModel);
+		binding.setLifecycleOwner(this);
+
+		//in case of activity created for first time, search for the triggered query.
 		if (searchViewModel.getSearchQueryState() == null){
 			searchViewModel.searchFor(getIntent().getStringExtra(SEARCH_QUERY_KEY));
 		}
 
+		//observe on pagedList
 		searchViewModel.getNewsLiveData().observe(this, newsUIPagedList -> newsAdapter.submitList(newsUIPagedList));
 
+		//init recycler view
 		recyclerView.setAdapter(newsAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+		//add click listener to recycler adapter
 		newsAdapter.setClickListener((newsUI, imageView) ->
 		DetailsActivity.startDetailsActivity(this, newsUI, imageView));
 	}
@@ -92,20 +101,24 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 		return true;
 	}
 
+	//set triggered search query into SearchView edit text
 	private void setupSearchView(MenuItem menuItem) {
 		menuItem.expandActionView();
 		searchView = (SearchView) menuItem.getActionView();
 		searchView.setOnQueryTextListener(this);
 		searchView.setQuery(searchViewModel.getSearchQueryState(), false);
 		searchView.setIconified(false);
+		searchView.clearFocus();
 	}
 
+	//listen to search view query change
 	@Override
 	public boolean onQueryTextSubmit(String query) {
 		searchViewModel.searchFor(query);
 		return true;
 	}
 
+	//un used callback
 	@Override
 	public boolean onQueryTextChange(String newText) {
 		return false;

@@ -62,8 +62,12 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ActivityNewsBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_news);
+
 		ButterKnife.bind(this);
+
 		setSupportActionBar(toolbar);
+
+		//dagger setup
 		DaggerNewsScreenComponent.builder()
 		.loadMoreListener(this)
 		.PresentationComponent(App.getPresentationComponent(this))
@@ -71,17 +75,19 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 
 		newsViewModel = ViewModelProviders.of(this, viewModelFactory).get(NewsViewModel.class);
 
+		//data binding setup
 		binding.setVm(newsViewModel);
 		binding.setLifecycleOwner(this);
 
-		newsViewModel.createNewsPagedList();
-
+		//observe on paged list
 		newsViewModel.getNewsPagedListLiveData().observe(this, newsUIPagedList -> newsAdapter.submitList(newsUIPagedList));
 
-		newsViewModel.getLoadNewsStats().observe(this, dataStatusObserver);
+		//observe on news data loading status
+		newsViewModel.getLoadNewsStats().observeSingle(this, dataStatusObserver);
 
 		setupRecycler();
 
+		//set click listener to recycler adapter
 		newsAdapter.setClickListener((newsUI, imageView) ->
 		DetailsActivity.startDetailsActivity(this, newsUI, imageView));
 	}
@@ -101,16 +107,21 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 		return true;
 	}
 
+	//callback to load next news page
 	@Override
 	public void onLoadMore() {
 		loadNextPage();
 	}
 
+	/**
+	 * loads next news page
+	 */
 	private void loadNextPage() {
 		pagingManger.setLoading(true);
 		newsViewModel.loadNews(pagingManger.getPageNumber());
 	}
 
+	//callback for SearchView submit button click.
 	@Override
 	public boolean onQueryTextSubmit(String query) {
 		startSearchActivity(query);
@@ -118,6 +129,9 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 		return true;
 	}
 
+	/**
+	 * clears search view text, and collapses it.
+	 */
 	private void clearSearchView() {
 		searchView.setQuery("", false);
 		searchView.clearFocus();
@@ -125,12 +139,19 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 		toolbar.getMenu().findItem(R.id.action_search).collapseActionView();
 	}
 
+	/**
+	 * fires an intent to open SearchActivity
+	 * @param query search query.
+	 */
 	private void startSearchActivity(String query) {
 		Intent intent = new Intent(this, SearchActivity.class);
 		intent.putExtra(SearchActivity.SEARCH_QUERY_KEY, query);
 		startActivity(intent);
 	}
 
+	/**
+	 * loading news data status observer
+	 */
 	Observer<DataStatus> dataStatusObserver = dataStatus -> {
 		switch (dataStatus) {
 			case SUCCESS:
@@ -153,6 +174,7 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 		pagingManger.setLoading(false);
 	};
 
+	//unused searchView callback
 	@Override
 	public boolean onQueryTextChange(String newText) {
 		return false;
