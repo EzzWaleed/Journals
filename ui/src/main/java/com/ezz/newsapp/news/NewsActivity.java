@@ -79,6 +79,9 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 		binding.setVm(newsViewModel);
 		binding.setLifecycleOwner(this);
 
+		//create pagedList
+		newsViewModel.createNewsPagedList();
+
 		//observe on paged list
 		newsViewModel.getNewsPagedListLiveData().observe(this, newsUIPagedList -> newsAdapter.submitList(newsUIPagedList));
 

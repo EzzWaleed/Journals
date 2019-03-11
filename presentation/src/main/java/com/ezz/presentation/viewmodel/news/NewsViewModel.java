@@ -38,24 +38,24 @@ public class NewsViewModel extends BaseViewModel {
 		super(subscribeOn, observeOn);
 		this.newsUseCase = newsUsecase;
 		this.pagingState = pagingState;
-		//create news paged list
-		createNewsPagedList();
 	}
 
 	/**
 	 * Creates a paged list of {@link NewsUI} as a stream of LiveData,
 	 * and assign it to newsPagedListLiveData variable if it not already assigned.
 	 */
-	private void createNewsPagedList() {
-		execute(
-		disposable -> pagingDataStatus.postValue(DataStatus.LOADING),
-		newsUIPagedList -> {
-			newsPagedListLiveData.postValue(newsUIPagedList);
-			pagingDataStatus.setValue(DataStatus.SUCCESS);
-		},
-		throwable -> pagingDataStatus.postValue(DataStatus.ERROR),
-		newsUseCase.getNewsPagedList()
-		);
+	public void createNewsPagedList() {
+		if (newsPagedListLiveData.getValue() == null){
+			execute(
+			disposable -> pagingDataStatus.postValue(DataStatus.LOADING),
+			newsUIPagedList -> {
+				newsPagedListLiveData.postValue(newsUIPagedList);
+				pagingDataStatus.setValue(DataStatus.SUCCESS);
+			},
+			throwable -> pagingDataStatus.postValue(DataStatus.ERROR),
+			newsUseCase.getNewsPagedList()
+			);
+		}
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class NewsViewModel extends BaseViewModel {
 		return loadNewsStats;
 	}
 
-	public MutableLiveData<DataStatus> getPagingDataStatus() {
+	public LiveData<DataStatus> getPagingDataStatus() {
 		return pagingDataStatus;
 	}
 
