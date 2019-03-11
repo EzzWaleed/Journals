@@ -47,27 +47,27 @@ public class NewsViewModelTest {
 	public void success_load_news() throws InterruptedException {
 		Mockito.when(usecase.loadNews(1)).thenReturn(Observable.just(DataStatus.SUCCESS));
 		viewModel.loadNews(1);
-		assertEquals(LiveDataTestUtil.getValue(viewModel.loadNewsStats), DataStatus.SUCCESS);
+		assertEquals(LiveDataTestUtil.getValue(viewModel.getLoadNewsStats()), DataStatus.SUCCESS);
 	}
 
 	@Test
 	public void loading_news() throws InterruptedException {
 		Mockito.when(usecase.loadNews(1)).thenReturn(Observable.just(DataStatus.LOADING));
 		viewModel.loadNews(1);
-		assertEquals(LiveDataTestUtil.getValue(viewModel.loadNewsStats), DataStatus.LOADING);
+		assertEquals(LiveDataTestUtil.getValue(viewModel.getLoadNewsStats()), DataStatus.LOADING);
 	}
 
 	@Test
 	public void error_load_news() throws InterruptedException {
 		Mockito.when(usecase.loadNews(1)).thenReturn(Observable.just(DataStatus.ERROR));
 		viewModel.loadNews(1);
-		assertEquals(LiveDataTestUtil.getValue(viewModel.loadNewsStats), DataStatus.ERROR);
+		assertEquals(LiveDataTestUtil.getValue(viewModel.getLoadNewsStats()), DataStatus.ERROR);
 	}
 
 	@Test
 	public void all_news_items_loaded() throws InterruptedException {
 		Mockito.when(usecase.loadNews(1)).thenReturn(Observable.just(DataStatus.HAS_LOADED_ALL_ITEMS));
 		viewModel.loadNews(1);
-		assertEquals(LiveDataTestUtil.getValue(viewModel.loadNewsStats), DataStatus.HAS_LOADED_ALL_ITEMS);
+		assertEquals(LiveDataTestUtil.getValue(viewModel.getLoadNewsStats()), DataStatus.HAS_LOADED_ALL_ITEMS);
 	}
 }
