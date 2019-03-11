@@ -27,11 +27,13 @@ public class NewsViewModel extends BaseViewModel {
 	private GetNewsUseCase<NewsUI> newsUseCase;
 	private PagingState pagingState;
 
-	private LiveData<PagedList<NewsUI>> newsPagedListLiveData;
+	private MutableLiveData<PagedList<NewsUI>> newsPagedListLiveData = new MutableLiveData<>();
 	private MutableLiveData<DataStatus> loadNewsStats = new MutableLiveData<>();
 
+	private MutableLiveData<DataStatus> pagingDataStatus = new MutableLiveData<>();
+
 	@Inject
-	public NewsViewModel(@Named(value = IO_SCHEDULER) Scheduler subscribeOn, @Named(value = MAIN_THREAD_SCHEDULER) Scheduler observeOn, GetNewsUseCase<NewsUI> newsUsecase, PagingState pagingState) {
+	NewsViewModel(@Named(value = IO_SCHEDULER) Scheduler subscribeOn, @Named(value = MAIN_THREAD_SCHEDULER) Scheduler observeOn, GetNewsUseCase<NewsUI> newsUsecase, PagingState pagingState) {
 		super(subscribeOn, observeOn);
 		this.newsUseCase = newsUsecase;
 		this.pagingState = pagingState;
@@ -42,9 +44,15 @@ public class NewsViewModel extends BaseViewModel {
 	 * and assign it to newsPagedListLiveData variable if it not already assigned.
 	 */
 	public void createNewsPagedList() {
-		if (newsPagedListLiveData == null) {
-			newsPagedListLiveData = newsUseCase.getNewsPagedList();
-		}
+		execute(
+		disposable -> pagingDataStatus.postValue(DataStatus.LOADING),
+		newsUIPagedList -> {
+			newsPagedListLiveData.postValue(newsUIPagedList);
+			pagingDataStatus.setValue(DataStatus.SUCCESS);
+		},
+		throwable -> pagingDataStatus.postValue(DataStatus.ERROR),
+		newsUseCase.getNewsPagedList()
+		);
 	}
 
 	/**
@@ -65,6 +73,10 @@ public class NewsViewModel extends BaseViewModel {
 
 	public LiveData<DataStatus> getLoadNewsStats() {
 		return loadNewsStats;
+	}
+
+	public MutableLiveData<DataStatus> getPagingDataStatus() {
+		return pagingDataStatus;
 	}
 
 	public PagingState getPagingState() {

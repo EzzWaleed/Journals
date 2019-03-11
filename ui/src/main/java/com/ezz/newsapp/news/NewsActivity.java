@@ -3,10 +3,13 @@ package com.ezz.newsapp.news;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.ezz.domain.resource.DataStatus;
 import com.ezz.newsapp.App;
+import com.ezz.newsapp.BR;
 import com.ezz.newsapp.R;
+import com.ezz.newsapp.databinding.ActivityNewsBinding;
 import com.ezz.newsapp.news.adapter.NewsAdapter;
 import com.ezz.newsapp.news.details.DetailsActivity;
 import com.ezz.newsapp.news.di.DaggerNewsScreenComponent;
@@ -34,6 +37,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+
 public class NewsActivity extends AppCompatActivity implements PagingManger.LoadMoreListener, SearchView.OnQueryTextListener {
 
 	@Inject
@@ -57,16 +61,18 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		DataBindingUtil.setContentView(this, R.layout.activity_news);
+		ActivityNewsBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_news);
 		ButterKnife.bind(this);
 		setSupportActionBar(toolbar);
-
 		DaggerNewsScreenComponent.builder()
 		.loadMoreListener(this)
 		.PresentationComponent(App.getPresentationComponent(this))
 		.build().inject(this);
 
 		newsViewModel = ViewModelProviders.of(this, viewModelFactory).get(NewsViewModel.class);
+
+		binding.setVm(newsViewModel);
+		binding.setLifecycleOwner(this);
 
 		newsViewModel.createNewsPagedList();
 

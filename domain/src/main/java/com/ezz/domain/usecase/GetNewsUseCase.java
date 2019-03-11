@@ -12,6 +12,7 @@ import androidx.paging.DataSource;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
+import androidx.paging.RxPagedListBuilder;
 import io.reactivex.Observable;
 
 /**
@@ -43,8 +44,8 @@ public class GetNewsUseCase<T> {
 	 * @return the requested {@link NewsDomain} data source factory.
 	 */
 	// TODO: 3/7/19 change return type to PagedList when google adds PagedList transformation capability.
-	public LiveData<PagedList<T>> getNewsPagedList() {
+	public Observable<PagedList<T>> getNewsPagedList() {
 		DataSource.Factory<Integer, T> dataSourceFactory = mapper.map(newsRepository.getNewsDataSourceFactory());
-		return new LivePagedListBuilder<>(dataSourceFactory, 10).build();
+		return new RxPagedListBuilder<>(dataSourceFactory, 10).buildObservable();
 	}
 }

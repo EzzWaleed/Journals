@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+        <import type="com.ezz.domain.resource.DataStatus"/>
+        <import type="android.view.View"/>
+        <variable
+            name="vm"
+            type="com.ezz.presentation.viewmodel.news.NewsViewModel"/>
+    </data>
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -30,6 +38,12 @@
         tools:listitem="@layout/list_item_news"
         tools:itemCount="6"
         app:attachItemAnimator="@{true}"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="@{vm.pagingDataStatus == DataStatus.LOADING ? View.VISIBLE : View.GONE}"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
