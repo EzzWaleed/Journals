@@ -70,9 +70,9 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 
 		newsViewModel.createNewsPagedList();
 
-		newsViewModel.newsPagedListLiveData.observe(this, newsUIPagedList -> newsAdapter.submitList(newsUIPagedList));
+		newsViewModel.getNewsPagedListLiveData().observe(this, newsUIPagedList -> newsAdapter.submitList(newsUIPagedList));
 
-		newsViewModel.loadNewsStats.observe(this, dataStatusObserver);
+		newsViewModel.getLoadNewsStats().observe(this, dataStatusObserver);
 
 		setupRecycler();
 
