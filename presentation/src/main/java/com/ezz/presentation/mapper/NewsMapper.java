@@ -20,19 +20,4 @@ public interface NewsMapper {
 	 * @return mapped entity
 	 */
 	NewsUI mapToUI(@NonNull NewsDomain newsDomain);
-
-	/**
-	 * maps {@link NewsDomain} list to {@link NewsUI} list
-	 * @param newsDomainList list to be mapped
-	 * @return mapped list
-	 */
-	List<NewsUI> mapToUIList(@NonNull List<NewsDomain> newsDomainList);
-
-	/**
-	 * maps {@link NewsDomain} resource list to {@link NewsUI} resource list.
-	 * @param newsDomainListResource resource to be mapped
-	 * @return mapped resource
-	 */
-	Resource<List<NewsUI>> mapToUIResourceList(@NonNull Resource<List<NewsDomain>> newsDomainListResource);
-
 }
