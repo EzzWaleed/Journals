@@ -1,6 +1,6 @@
 package com.ezz.presentation.viewmodel.news.di;
 
-import com.ezz.presentation.di.SchedulersModule;
+import com.ezz.data.di.SchedulersModule;
 import com.ezz.presentation.viewmodel.news.NewsViewModel;
 import com.ezz.presentation.viewmodel.viewmodel_factory.di.ViewModelKey;
 

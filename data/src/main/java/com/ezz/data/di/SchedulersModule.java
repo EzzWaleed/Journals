@@ -1,4 +1,4 @@
-package com.ezz.presentation.di;
+package com.ezz.data.di;
 
 import javax.inject.Named;
 

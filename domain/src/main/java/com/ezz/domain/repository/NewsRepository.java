@@ -30,13 +30,18 @@ public interface NewsRepository {
 	DataSource.Factory<Integer, NewsDomain> getNewsDataSourceFactory();
 
 	/**
-	 * retrieves {@link NewsDomain} list associated with its network status as stream of Observable
-	 * according to the requested search query and page number
+	 * retrieves {@link NewsDomain} DataSource
+	 * according to the requested search query
 	 * @param query the requested search query
-	 * @param pageNumber the requested page number
-	 * @return list of {@link NewsDomain} list associated with its network status as stream of Observable
+	 * @return list of {@link NewsDomain} DatSource
 	 */
-	Observable<Resource<List<NewsDomain>>> searchNews(String query, Integer pageNumber);
+	DataSource.Factory<Integer, NewsDomain> getSearchNewsDataSource(String query);
+
+	/**
+	 * updates {@link DataSource.Factory} search query.
+	 * @param query new search query
+	 */
+	void updateSearchQuery(String query);
 
 	/**
 	 * insert list of {@link NewsDomain} into local db

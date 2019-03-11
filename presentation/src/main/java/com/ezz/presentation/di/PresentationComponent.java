@@ -1,6 +1,7 @@
 package com.ezz.presentation.di;
 
 import com.ezz.data.di.DataComponent;
+import com.ezz.presentation.mapper.DataSourceMapper;
 import com.ezz.presentation.mapper.NewsMapper;
 import com.ezz.presentation.mapper.di.MapperModule;
 import com.ezz.presentation.viewmodel.news.NewsViewModel;
@@ -17,5 +18,4 @@ import dagger.Component;
 @PresentationScope
 public interface  PresentationComponent {
 	ViewModelFactory viewModelFactory();
-	NewsMapper newsMapper();
 }

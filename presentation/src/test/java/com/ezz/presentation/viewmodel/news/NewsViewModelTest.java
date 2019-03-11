@@ -1,8 +1,8 @@
 package com.ezz.presentation.viewmodel.news;
 
 import com.ezz.domain.resource.DataStatus;
-import com.ezz.domain.usecase.GetNewsUsecase;
-import com.ezz.presentation.mapper.NewsMapper;
+import com.ezz.domain.usecase.GetNewsUseCase;
+import com.ezz.presentation.model.NewsUI;
 import com.ezz.presentation.viewmodel.news.paging.PagingKeeper;
 import com.ezz.presentation.viewmodel.util.LiveDataTestUtil;
 
@@ -29,18 +29,14 @@ public class NewsViewModelTest {
 	public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
 	@Mock
-	NewsMapper newsMapper;
-
-
-	@Mock
-	GetNewsUsecase usecase;
+	GetNewsUseCase<NewsUI> usecase;
 
 	private NewsViewModel viewModel;
 
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
-		viewModel = new NewsViewModel(Schedulers.trampoline(), Schedulers.trampoline(), usecase, newsMapper, new PagingKeeper());
+		viewModel = new NewsViewModel(Schedulers.trampoline(), Schedulers.trampoline(), usecase, new PagingKeeper());
 	}
 
 	@Test

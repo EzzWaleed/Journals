@@ -53,26 +53,26 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 
 	private SearchViewModel searchViewModel;
 
-	private String searchQuery;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		ActivitySearchBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_search);
 
-		searchQuery = getIntent().getStringExtra(SEARCH_QUERY_KEY);
+		DataBindingUtil.setContentView(this, R.layout.activity_search);
 
 		ButterKnife.bind(this);
 
 		setSupportActionBar(toolbar);
 
-		DaggerSearchScreenComponent.builder().
-		presentationComponent(App.getPresentationComponent(this))
+		DaggerSearchScreenComponent.builder()
+		.presentationComponent(App.getPresentationComponent(this))
 		.build().inject(this);
 
 		searchViewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchViewModel.class);
 
-		binding.setViewModel(searchViewModel);
+		if (searchViewModel.getSearchQueryState() == null){
+			searchViewModel.searchFor(getIntent().getStringExtra(SEARCH_QUERY_KEY));
+		}
 
 		searchViewModel.getNewsLiveData().observe(this, newsUIPagedList -> newsAdapter.submitList(newsUIPagedList));
 
@@ -96,7 +96,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 		menuItem.expandActionView();
 		searchView = (SearchView) menuItem.getActionView();
 		searchView.setOnQueryTextListener(this);
-		searchView.setQuery(searchQuery, true);
+		searchView.setQuery(searchViewModel.getSearchQueryState(), false);
 		searchView.setIconified(false);
 	}
 

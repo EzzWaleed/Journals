@@ -18,10 +18,10 @@ import dagger.Component;
 /**
  * Created by Ezz Waleed on 04,March,2019
  */
-@Component(modules = {NetworkModule.class, ImageLoaderModule.class, DatabaseModule.class, NewsMapperModule.class, RepositoryModule.class})
+@Component(modules = {ImageLoaderModule.class, DatabaseModule.class, NewsMapperModule.class, RepositoryModule.class})
 @DataScope
 public interface DataComponent {
-	
+
 	NewsRepository newsRepository();
 
 	ImageLoader imageLoader();
