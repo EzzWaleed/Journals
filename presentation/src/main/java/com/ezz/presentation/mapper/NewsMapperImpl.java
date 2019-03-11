@@ -48,20 +48,6 @@ public class NewsMapperImpl implements NewsMapper {
 		return new Date(time);
 	}
 
-	@Override
-	public List<NewsUI> mapToUIList(@NonNull List<NewsDomain> newsDomainList) {
-		List<NewsUI> newsUIList = new ArrayList<>();
-		for (NewsDomain newsDomain : newsDomainList){
-			newsUIList.add(mapToUI(newsDomain));
-		}
-		return newsUIList;
-	}
 
-	@Override
-	public Resource<List<NewsUI>> mapToUIResourceList(@NonNull Resource<List<NewsDomain>> domainResource) {
-		if (domainResource.data != null)
-			return new Resource<>(domainResource.status, mapToUIList(domainResource.data), domainResource.message);
-		else
-			return new Resource<>(domainResource.status, null, domainResource.message);
-	}
+
 }
