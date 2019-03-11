@@ -83,7 +83,7 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 	private void setupRecycler() {
 		recyclerView.setAdapter(newsAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
-		pagingManger.setPagingKeeper(newsViewModel.getPagingKeeper());
+		pagingManger.setPagingState(newsViewModel.getPagingState());
 		Paginate.with(recyclerView, pagingManger).addLoadingListItem(false).setLoadingTriggerThreshold(50).build();
 	}
 

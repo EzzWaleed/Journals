@@ -6,7 +6,7 @@ import com.ezz.domain.usecase.GetNewsUseCase;
 
 import com.ezz.presentation.model.NewsUI;
 import com.ezz.presentation.viewmodel.BaseViewModel;
-import com.ezz.presentation.viewmodel.news.paging.PagingKeeper;
+import com.ezz.presentation.viewmodel.news.paging.PagingState;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -24,17 +24,17 @@ import static com.ezz.data.di.SchedulersModule.MAIN_THREAD_SCHEDULER;
  */
 public class NewsViewModel extends BaseViewModel {
 
-	private GetNewsUseCase<NewsUI> newsUsecase;
-	private PagingKeeper pagingKeeper;
+	private GetNewsUseCase<NewsUI> newsUseCase;
+	private PagingState pagingState;
 
 	private LiveData<PagedList<NewsUI>> newsPagedListLiveData;
 	private MutableLiveData<DataStatus> loadNewsStats = new MutableLiveData<>();
 
 	@Inject
-	public NewsViewModel(@Named(value = IO_SCHEDULER) Scheduler subscribeOn, @Named(value = MAIN_THREAD_SCHEDULER) Scheduler observeOn, GetNewsUseCase<NewsUI> newsUsecase, PagingKeeper pagingKeeper) {
+	public NewsViewModel(@Named(value = IO_SCHEDULER) Scheduler subscribeOn, @Named(value = MAIN_THREAD_SCHEDULER) Scheduler observeOn, GetNewsUseCase<NewsUI> newsUsecase, PagingState pagingState) {
 		super(subscribeOn, observeOn);
-		this.newsUsecase = newsUsecase;
-		this.pagingKeeper = pagingKeeper;
+		this.newsUseCase = newsUsecase;
+		this.pagingState = pagingState;
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class NewsViewModel extends BaseViewModel {
 	 */
 	public void createNewsPagedList() {
 		if (newsPagedListLiveData == null) {
-			newsPagedListLiveData = newsUsecase.getNewsPagedList();
+			newsPagedListLiveData = newsUseCase.getNewsPagedList();
 		}
 	}
 
@@ -56,7 +56,7 @@ public class NewsViewModel extends BaseViewModel {
 		execute(loading -> loadNewsStats.postValue(DataStatus.LOADING),
 		dataStatus -> loadNewsStats.postValue(dataStatus),
 		throwable -> loadNewsStats.postValue(DataStatus.ERROR),
-		newsUsecase.loadNews(pageNumber));
+		newsUseCase.loadNews(pageNumber));
 	}
 
 	public LiveData<PagedList<NewsUI>> getNewsPagedListLiveData() {
@@ -67,7 +67,7 @@ public class NewsViewModel extends BaseViewModel {
 		return loadNewsStats;
 	}
 
-	public PagingKeeper getPagingKeeper() {
-		return pagingKeeper;
+	public PagingState getPagingState() {
+		return pagingState;
 	}
 }

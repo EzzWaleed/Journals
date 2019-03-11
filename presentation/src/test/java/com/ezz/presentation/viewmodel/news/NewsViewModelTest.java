@@ -3,7 +3,7 @@ package com.ezz.presentation.viewmodel.news;
 import com.ezz.domain.resource.DataStatus;
 import com.ezz.domain.usecase.GetNewsUseCase;
 import com.ezz.presentation.model.NewsUI;
-import com.ezz.presentation.viewmodel.news.paging.PagingKeeper;
+import com.ezz.presentation.viewmodel.news.paging.PagingState;
 import com.ezz.presentation.viewmodel.util.LiveDataTestUtil;
 
 import org.junit.Before;
@@ -12,12 +12,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 import static org.junit.Assert.*;
@@ -40,7 +36,7 @@ public class NewsViewModelTest {
 	@Before
 	public void setUp() {
 		initMocks(this);
-		viewModel = new NewsViewModel(Schedulers.trampoline(), Schedulers.trampoline(), usecase, new PagingKeeper());
+		viewModel = new NewsViewModel(Schedulers.trampoline(), Schedulers.trampoline(), usecase, new PagingState());
 	}
 
 	@Test

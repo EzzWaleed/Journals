@@ -9,10 +9,10 @@ import javax.inject.Inject;
 /**
  * Responsible to keep paging state with respect to android life cycle.
  */
-public class PagingKeeper {
+public class PagingState {
 
 	@Inject
-	public PagingKeeper() {
+	public PagingState() {
 	}
 
 	private int pageNumber = 1;
