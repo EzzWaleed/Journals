@@ -122,7 +122,7 @@
         segmentedgroup:layout_constraintTop_toBottomOf="@id/text_style_hint"
         segmentedgroup:sc_border_width="2dp"
         segmentedgroup:sc_checked_text_color="@color/white"
-        segmentedgroup:sc_tint_color="@color/colorAccent"
+        segmentedgroup:sc_tint_color="@color/colorPrimaryDark"
         android:checkedButton="@{fontSettings.textStyle ? @id/popup_aa_segment_dark : @id/popup_aa_segment_light}">
 
         <RadioButton
@@ -134,7 +134,7 @@
             android:text="@string/bold"
             android:textColor="@color/colorPrimary"
             android:textSize="14sp"
-            app:backgroundTint="@color/colorPrimary"
+            app:backgroundTint="@color/colorPrimaryDark"
             android:onCheckedChanged="@{(buttonView, isChecked) -> fontSettingsListener.onFontStyleChanged(isChecked)}"/>
 
         <RadioButton
@@ -143,7 +143,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:backgroundTint="@color/colorPrimary"
+            app:backgroundTint="@color/colorPrimaryDark"
             android:text="@string/normal"
             android:textColor="@color/colorPrimary"
             android:textSize="14sp" />
