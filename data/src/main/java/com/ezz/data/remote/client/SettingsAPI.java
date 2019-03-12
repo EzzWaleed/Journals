@@ -8,7 +8,7 @@ import java.util.Locale;
  */
 public class SettingsAPI {
 	public static String getApiKey() {
-		return "5be20de8622f4e25bfeea677e7929b54";
+		return "eea27d11f797499c9fdebd2210efb9ce";
 	}
 
 	public static String getBaseURL() {
