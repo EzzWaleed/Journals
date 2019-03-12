@@ -11,6 +11,8 @@ import com.ezz.presentation.viewmodel.util.LiveDataTestUtil;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 import org.mockito.Mock;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
@@ -27,6 +29,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 /**
  * Created by Ezz Waleed on 12,March,2019
  */
+@RunWith(JUnit4.class)
 public class SearchViewModelTest {
 
 	@Rule
