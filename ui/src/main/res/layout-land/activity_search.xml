@@ -44,7 +44,7 @@
                 android:id="@+id/view2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginBottom="@dimen/_118sdp"
+                android:layout_marginBottom="@dimen/_75sdp"
                 android:background="@color/color_black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -53,39 +53,39 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0" />
 
-        <View
-            android:id="@+id/view3"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view2"
-            android:background="@color/white"/>
+            <View
+                android:id="@+id/view3"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view2"
+                android:background="@color/white"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/news_recycler_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_75sdp"
-            android:layout_marginBottom="@dimen/_85sdp"
-            app:attachItemAnimator="@{true}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:itemCount="6"
-            tools:listitem="@layout/list_item_news" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/news_recycler_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_50sdp"
+                app:attachItemAnimator="@{true}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="6"
+                tools:listitem="@layout/list_item_news" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/image"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:src="@mipmap/user_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/news_recycler_view"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:src="@mipmap/user_image"/>
+                android:layout_marginEnd="@dimen/_25sdp"
+                app:layout_constraintTop_toBottomOf="@id/news_recycler_view"/>
 
             <TextView
                 android:id="@+id/textView"
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:text="Ezz Walid"
-                android:textSize="@dimen/_11ssp"
+                android:textSize="@dimen/_10ssp"
                 android:textColor="@color/color_black"
                 android:textStyle="bold"
                 android:typeface="monospace"
@@ -108,9 +108,10 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:text="@string/journals"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_17ssp"
+                android:textSize="@dimen/_11ssp"
                 android:textStyle="bold"
                 android:typeface="monospace"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/news_recycler_view"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/view2" />
@@ -120,12 +121,12 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="@{vm.pagingDataStatus == DataStatus.LOADING ? View.VISIBLE : View.GONE}"/>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{vm.pagingDataStatus == DataStatus.LOADING ? View.VISIBLE : View.GONE}"/>
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

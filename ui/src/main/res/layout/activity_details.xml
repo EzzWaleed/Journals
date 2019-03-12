@@ -127,7 +127,7 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="@id/title_tv"
-                        android:layout_marginTop="300dp"
+                        android:layout_marginTop="@dimen/_200sdp"
                         android:textSize="@{fontSettings.textSize}"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:ellipsize="end"
@@ -177,7 +177,6 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.core.widget.NestedScrollView>
-
 
 
 

@@ -9,10 +9,11 @@
             type="com.ezz.newsapp.news.adapter.NewsAdapter.ShareClickListener"/>
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="280dp"
+    android:layout_width="@dimen/_215sdp"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginStart="15dp">
+    android:foreground="@drawable/ripple_item"
+    android:layout_marginStart="@dimen/_10sdp">
 
     <ImageView
         android:id="@+id/news_image"
@@ -35,12 +36,12 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:background="#00FFFFFF"
-        android:layout_marginBottom="20dp"
-        android:layout_marginStart="15dp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_10sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_share_black_24dp"
-        android:padding="5dp"
+        android:padding="@dimen/_3sdp"
         android:scaleType="fitCenter"
         android:foreground="@drawable/ripple_round"
         android:onClick="@{() -> onShareClick.onClick(news)}"
@@ -48,21 +49,21 @@
 
     <View
         android:id="@+id/sep_1"
-        android:layout_width="20dp"
-        android:layout_height="2dp"
+        android:layout_width="@dimen/_15sdp"
+        android:layout_height="@dimen/_1sdp"
         app:layout_constraintStart_toStartOf="@id/share_ig_btn"
         app:layout_constraintBottom_toTopOf="@id/share_ig_btn"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="@dimen/_15sdp"
         android:background="#ADFFFFFF"/>
 
     <View
         android:id="@+id/sep_2"
         android:layout_width="0dp"
-        android:layout_height="2dp"
+        android:layout_height="@dimen/_1sdp"
         app:layout_constraintStart_toEndOf="@id/sep_1"
         app:layout_constraintBottom_toBottomOf="@id/sep_1"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="15dp"
+        android:layout_marginEnd="@dimen/_10sdp"
         android:background="#2AFFFFFF"/>
 
 
@@ -70,14 +71,14 @@
         android:id="@+id/source_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxWidth="110dp"
+        android:maxWidth="@dimen/_90sdp"
         android:maxLines="1"
         android:ellipsize="end"
         app:layout_constraintStart_toStartOf="@id/sep_1"
         app:layout_constraintBottom_toTopOf="@id/sep_1"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="@dimen/_15sdp"
         tools:text="New York Times"
-        android:textSize="15sp"
+        android:textSize="@dimen/_11ssp"
         android:typeface="normal"
         android:textStyle="normal"
         android:text="@{news.sourceName}"
@@ -90,10 +91,10 @@
         android:ellipsize="end"
         app:layout_constraintStart_toEndOf="@id/source_name_tv"
         app:layout_constraintBottom_toTopOf="@id/sep_1"
-        android:layout_marginStart="7dp"
-        android:layout_marginBottom="20dp"
-        android:text="\u2022"
-        android:textSize="15sp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:text="@string/u2022"
+        android:textSize="@dimen/_12ssp"
         android:typeface="normal"
         android:textStyle="bold"
         android:textColor="@color/colorWhiteFaded"/>
@@ -102,15 +103,15 @@
         android:id="@+id/date_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="@dimen/_10sdp"
         android:ellipsize="end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/date_source_sep"
         app:layout_constraintBottom_toTopOf="@id/sep_1"
         android:layout_marginStart="7dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="@dimen/_15sdp"
         tools:text="@tools:sample/date/mmddyy"
-        android:textSize="15sp"
+        android:textSize="@dimen/_11ssp"
         android:typeface="normal"
         android:textStyle="normal"
         android:text="@{news.dateFormatted}"
@@ -124,15 +125,15 @@
         app:layout_constraintStart_toStartOf="@id/sep_1"
         app:layout_constraintBottom_toTopOf="@id/source_name_tv"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:maxLines="2"
         android:ellipsize="end"
-        android:textSize="22sp"
+        android:textSize="@dimen/_18ssp"
         android:text="@{news.title}"
         tools:text="@tools:sample/lorem/random"
-        android:layout_marginEnd="20dp"/>
+        android:layout_marginEnd="@dimen/_10sdp"/>
 
     <TextView
         android:id="@+id/time_tv"
@@ -140,12 +141,12 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/title_tv"
         app:layout_constraintStart_toStartOf="@id/title_tv"
-        android:layout_marginBottom="15dp"
-        android:textSize="15sp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:textSize="@dimen/_11ssp"
         app:layout_constraintEnd_toEndOf="parent"
         android:ellipsize="end"
-        android:layout_marginEnd="20dp"
-        android:text="Today"
+        android:layout_marginEnd="@dimen/_10sdp"
+        tools:text="Today"
         app:date="@{news.publishedDate}"
         android:textColor="@color/colorWhiteFaded"/>
 
@@ -158,7 +159,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#11323A"></View>
+            android:background="#11323A"/>
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 
