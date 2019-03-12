@@ -63,6 +63,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 		ButterKnife.bind(this);
 
 		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		//dagger setup
 		DaggerSearchScreenComponent.builder()

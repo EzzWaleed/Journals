@@ -61,7 +61,9 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         ActivityDetailsBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_details);
         ButterKnife.bind(this);
+
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         DaggerDetailsActivityComponent
         .builder()
@@ -116,5 +118,6 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         fontSettings.textStyle.set(isBold);
         fontSettingsDataStore.setIsBold(isBold);
     }
+
 
 }
