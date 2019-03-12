@@ -60,4 +60,4 @@ The App is open sourced, however, contribution is not currently needed.
 	
 ## License
 
-To Be Added soon.
+[Apache License 2.0](https://choosealicense.com/licenses/apache-2.0/)
