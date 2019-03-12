@@ -56,9 +56,15 @@ public class ImageBindingAdapter {
 	}
 
 	private static void animateBack(ImageView imageView, ShimmerFrameLayout shimmerFrameLayout){
-		imageView.animate().alpha(1f).setDuration(900).setStartDelay(100);
-		shimmerFrameLayout.setAlpha(0f);
-		shimmerFrameLayout.stopShimmer();
+		imageView.animate().alpha(1f).setDuration(900).setStartDelay(150);
+		shimmerFrameLayout.animate().alpha(0f).setListener(new AnimatorListenerAdapter() {
+			@Override
+			public void onAnimationEnd(Animator animation) {
+				super.onAnimationEnd(animation);
+				shimmerFrameLayout.stopShimmer();
+			}
+		});
+
 	}
 
 }

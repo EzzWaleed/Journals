@@ -33,10 +33,10 @@ public class ItemAnimatorModule {
 	@Named(value = FADE_IN_RIGHT)
 	RecyclerView.ItemAnimator provideItemAnimatorRight(){
 		FadeInRightAnimator fadeInRightAnimator = new FadeInRightAnimator();
-		fadeInRightAnimator.setAddDuration(500);
-		fadeInRightAnimator.setChangeDuration(500);
-		fadeInRightAnimator.setMoveDuration(500);
-		fadeInRightAnimator.setRemoveDuration(500);
+		fadeInRightAnimator.setAddDuration(900);
+		fadeInRightAnimator.setChangeDuration(900);
+		fadeInRightAnimator.setMoveDuration(900);
+		fadeInRightAnimator.setRemoveDuration(900);
 		return fadeInRightAnimator;
 	}
 }
