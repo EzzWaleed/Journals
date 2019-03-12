@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.ezz.newsapp.R;
 import com.ezz.newsapp.databinding.ListItemNewsBinding;
+import com.ezz.newsapp.databinding.ListItemNewsNewBinding;
 import com.ezz.newsapp.util.ShareUtil;
 import com.ezz.presentation.model.NewsUI;
 
@@ -39,8 +40,8 @@ public class NewsAdapter extends PagedListAdapter<NewsUI, NewsAdapter.NewsViewHo
 	public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		LayoutInflater layoutInflater =
 		LayoutInflater.from(parent.getContext());
-		ListItemNewsBinding itemBinding =
-		ListItemNewsBinding.inflate(layoutInflater, parent, false);
+		ListItemNewsNewBinding itemBinding =
+		ListItemNewsNewBinding.inflate(layoutInflater, parent, false);
 		return new NewsViewHolder(itemBinding);
 	}
 
@@ -52,22 +53,22 @@ public class NewsAdapter extends PagedListAdapter<NewsUI, NewsAdapter.NewsViewHo
 
 	class NewsViewHolder extends RecyclerView.ViewHolder implements ShareClickListener{
 
-		private final ListItemNewsBinding listItemNewsBinding;
+		private final ListItemNewsNewBinding listItemNewsNewBinding;
 
 		@BindView(R.id.news_image)
 		ImageView imageView;
 
-		NewsViewHolder(@NonNull ListItemNewsBinding listItemNewsBinding) {
-			super(listItemNewsBinding.getRoot());
-			this.listItemNewsBinding = listItemNewsBinding;
-			ButterKnife.bind(this, listItemNewsBinding.getRoot());
+		NewsViewHolder(@NonNull ListItemNewsNewBinding listItemNewsNewBinding) {
+			super(listItemNewsNewBinding.getRoot());
+			this.listItemNewsNewBinding = listItemNewsNewBinding;
+			ButterKnife.bind(this, listItemNewsNewBinding.getRoot());
 		}
 
 		void bind(){
 			NewsUI newsUI = getItem(getAdapterPosition());
-			listItemNewsBinding.setNews(newsUI);
-			listItemNewsBinding.setOnShareClick(this::onClick);
-			listItemNewsBinding.executePendingBindings();
+			listItemNewsNewBinding.setNews(newsUI);
+			listItemNewsNewBinding.setOnShareClick(this::onClick);
+			listItemNewsNewBinding.executePendingBindings();
 			itemView.setOnClickListener(v -> {
 				if (clickListener != null) {
 					clickListener.onItemClick(newsUI, imageView);

@@ -161,7 +161,7 @@
             app:layout_constraintTop_toBottomOf="@id/date_tv"
             app:shimmer_auto_start="false"
             app:url="@{news.imageUrl}"
-            app:shimmer_base_color="@color/colorPrimary"
+            app:shimmer_highlight_alpha="0.2"
             app:imageViewTag='@{String.format("newsImage")}'>
 
 

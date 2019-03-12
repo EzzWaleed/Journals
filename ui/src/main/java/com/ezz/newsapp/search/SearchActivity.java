@@ -89,7 +89,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 
 		//init recycler view
 		recyclerView.setAdapter(newsAdapter);
-		recyclerView.setLayoutManager(new LinearLayoutManager(this));
+		recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
 		//add click listener to recycler adapter
 		newsAdapter.setClickListener((newsUI, imageView) ->

@@ -5,6 +5,7 @@ import javax.inject.Named;
 import androidx.recyclerview.widget.RecyclerView;
 import dagger.Module;
 import dagger.Provides;
+import jp.wasabeef.recyclerview.animators.FadeInRightAnimator;
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator;
 
 /**
@@ -15,6 +16,8 @@ public class ItemAnimatorModule {
 
 	public static final String FADE_IN_UP = "fadeInUp";
 
+	public static final String FADE_IN_RIGHT = "fadeInRight";
+
 	@Provides
 	@Named(value = FADE_IN_UP)
 	RecyclerView.ItemAnimator provideItemAnimator(){
@@ -24,5 +27,16 @@ public class ItemAnimatorModule {
 		fadeInUpAnimator.setMoveDuration(500);
 		fadeInUpAnimator.setRemoveDuration(500);
 		return fadeInUpAnimator;
+	}
+
+	@Provides
+	@Named(value = FADE_IN_RIGHT)
+	RecyclerView.ItemAnimator provideItemAnimatorRight(){
+		FadeInRightAnimator fadeInRightAnimator = new FadeInRightAnimator();
+		fadeInRightAnimator.setAddDuration(500);
+		fadeInRightAnimator.setChangeDuration(500);
+		fadeInRightAnimator.setMoveDuration(500);
+		fadeInRightAnimator.setRemoveDuration(500);
+		return fadeInRightAnimator;
 	}
 }

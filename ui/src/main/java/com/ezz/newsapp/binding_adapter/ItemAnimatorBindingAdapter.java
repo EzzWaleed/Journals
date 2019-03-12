@@ -7,6 +7,7 @@ import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator;
 
+import static com.ezz.newsapp.di.ItemAnimatorModule.FADE_IN_RIGHT;
 import static com.ezz.newsapp.di.ItemAnimatorModule.FADE_IN_UP;
 
 /**
@@ -21,7 +22,7 @@ public class ItemAnimatorBindingAdapter {
 	RecyclerView.ItemAnimator itemAnimator;
 
 	@Inject
-	public ItemAnimatorBindingAdapter(@Named(value = FADE_IN_UP) RecyclerView.ItemAnimator itemAnimator) {
+	public ItemAnimatorBindingAdapter(@Named(value = FADE_IN_RIGHT) RecyclerView.ItemAnimator itemAnimator) {
 		this.itemAnimator = itemAnimator;
 	}
 

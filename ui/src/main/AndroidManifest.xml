@@ -20,12 +20,14 @@
         <activity
             android:name=".search.SearchActivity"
             android:label="@string/title_activity_search"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/Toolbar"
+            android:windowSoftInputMode="adjustPan"
             android:parentActivityName=".news.NewsActivity" />
         <activity
             android:name=".news.NewsActivity"
             android:label="@string/title_activity_news"
             android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -3,9 +3,11 @@ package com.ezz.newsapp.news.details;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.ezz.newsapp.databinding.ActivityDetailsBinding;
+import com.ezz.newsapp.databinding.ActivityDetailsNewBinding;
 import com.ezz.newsapp.news.details.di.DaggerDetailsActivityComponent;
 import com.ezz.newsapp.news.details.font_settings.FontSettings;
 import com.ezz.newsapp.news.details.font_settings.FontSettingsBottomSheet;
@@ -23,6 +25,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
@@ -53,17 +57,22 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         intent.putExtra(NEWS_KEY, newsUI);
         ActivityOptionsCompat options = ActivityOptionsCompat.
         makeSceneTransitionAnimation(activity, imageView, activity.getString(R.string.image_transition));
-        activity.startActivity(intent, options.toBundle());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            activity.startActivity(intent, options.toBundle());
+        } else {
+            activity.startActivity(intent);
+        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityDetailsBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_details);
+        fullScreenMode();
+        ActivityDetailsNewBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_details_new);
         ButterKnife.bind(this);
 
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         DaggerDetailsActivityComponent
         .builder()
@@ -81,6 +90,15 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         else {
             throw new NullPointerException("NewsUI must passed via intent.");
         }
+    }
+
+    /**
+     * Enters full screen mode.
+     */
+    private void fullScreenMode() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+        WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     @Override

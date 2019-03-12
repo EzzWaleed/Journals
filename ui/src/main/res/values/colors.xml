@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#DF4F2B</color>
-    <color name="colorPrimaryDark">#a61700</color>
-    <color name="colorAccent">#ff8157</color>
+    <color name="colorPrimary">#fff</color>
+    <color name="colorPrimaryDark">#000</color>
+    <color name="colorAccent">#fff</color>
     <color name="color_bg_white_dark">#60EBEBEB</color>
     <color name="color_black">#000</color>
     <color name="whiteRippleOldApi">#42ffffff</color>
     <color name="color_divider">#DBDBDB</color>
     <color name="color_primary_ripple">#8BDF4F2B</color>
+    <color name="colorWhiteFaded">#F0FFFFFF</color>
 </resources>

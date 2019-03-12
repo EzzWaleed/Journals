@@ -26,7 +26,6 @@ import javax.inject.Inject;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
@@ -49,11 +48,10 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 	@Inject
 	ViewModelFactory viewModelFactory;
 
-	@BindView(R.id.toolbar)
-	Toolbar toolbar;
 	@BindView(R.id.news_recycler_view)
 	RecyclerView recyclerView;
 
+	@BindView(R.id.search_view)
 	SearchView searchView;
 
 	NewsViewModel newsViewModel;
@@ -64,8 +62,6 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 		ActivityNewsBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_news);
 
 		ButterKnife.bind(this);
-
-		setSupportActionBar(toolbar);
 
 		//dagger setup
 		DaggerNewsScreenComponent.builder()
@@ -78,6 +74,7 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 		//data binding setup
 		binding.setVm(newsViewModel);
 		binding.setLifecycleOwner(this);
+		searchView.setOnQueryTextListener(this);
 
 		//create pagedList
 		newsViewModel.createNewsPagedList();
@@ -97,18 +94,18 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 
 	private void setupRecycler() {
 		recyclerView.setAdapter(newsAdapter);
-		recyclerView.setLayoutManager(new LinearLayoutManager(this));
+		recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 		pagingManger.setPagingState(newsViewModel.getPagingState());
 		Paginate.with(recyclerView, pagingManger).addLoadingListItem(false).setLoadingTriggerThreshold(50).build();
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.menu_main, menu);
-		searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-		searchView.setOnQueryTextListener(this);
-		return true;
-	}
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		getMenuInflater().inflate(R.menu.menu_main, menu);
+//		searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+//		searchView.setOnQueryTextListener(this);
+//		return true;
+//	}
 
 	//callback to load next news page
 	@Override
@@ -139,7 +136,6 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 		searchView.setQuery("", false);
 		searchView.clearFocus();
 		searchView.setIconified(true);
-		toolbar.getMenu().findItem(R.id.action_search).collapseActionView();
 	}
 
 	/**

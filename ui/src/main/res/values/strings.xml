@@ -19,4 +19,5 @@
     <string name="share_button_content_description">share button</string>
     <string name="adjust_font_size_content_description">adjust font size button</string>
     <string name="retry">Retry</string>
+    <string name="journals">Journals</string>
 </resources>

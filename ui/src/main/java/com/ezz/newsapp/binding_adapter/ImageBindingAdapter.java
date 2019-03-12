@@ -1,5 +1,7 @@
 package com.ezz.newsapp.binding_adapter;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -44,15 +46,19 @@ public class ImageBindingAdapter {
 	public void loadImage(ShimmerFrameLayout shimmerFrameLayout, String url, String tag){
 		@Nullable ImageView imageView = shimmerFrameLayout.getRootView().findViewWithTag(tag);
 		if (imageView != null) {
-			imageView.setVisibility(View.GONE);
-			shimmerFrameLayout.setVisibility(View.VISIBLE);
+			imageView.setAlpha(0f);
+			shimmerFrameLayout.setAlpha(0.5f);
 			shimmerFrameLayout.startShimmer();
 			imageLoader.loadImageWithCallback(imageView, url, () -> {
-				shimmerFrameLayout.stopShimmer();
-				shimmerFrameLayout.setVisibility(View.GONE);
-				imageView.setVisibility(View.VISIBLE);
+			animateBack(imageView, shimmerFrameLayout);
 			}, R.color.white, R.color.white);
 		}
+	}
+
+	private static void animateBack(ImageView imageView, ShimmerFrameLayout shimmerFrameLayout){
+		imageView.animate().alpha(1f).setDuration(900).setStartDelay(100);
+		shimmerFrameLayout.setAlpha(0f);
+		shimmerFrameLayout.stopShimmer();
 	}
 
 }
