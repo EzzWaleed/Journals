@@ -163,7 +163,7 @@ public class NewsActivity extends AppCompatActivity implements PagingManger.Load
 			case ERROR:
 				pagingManger.setLoadedAllItems(true);
 				Snackbar.make(recyclerView, getString(R.string.error_occured_message), Snackbar.LENGTH_INDEFINITE)
-				.setAction("Retry", v -> {
+				.setAction(getString(R.string.retry), v -> {
 					loadNextPage();
 					pagingManger.setLoadedAllItems(false);
 				}).show();

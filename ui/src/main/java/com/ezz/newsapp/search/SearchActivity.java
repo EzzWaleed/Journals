@@ -83,6 +83,9 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 		//observe on pagedList
 		searchViewModel.getNewsLiveData().observe(this, newsUIPagedList -> newsAdapter.submitList(newsUIPagedList));
 
+		//observe on paging status
+		searchViewModel.getPagingDataStatus().observe(this, this::showRetryIfError);
+
 		//init recycler view
 		recyclerView.setAdapter(newsAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -92,7 +95,18 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 		DetailsActivity.startDetailsActivity(this, newsUI, imageView));
 	}
 
+	/**
+	 * shows retry SnackBar in case of error status.
+	 * @param dataStatus status
+	 */
+	private void showRetryIfError(DataStatus dataStatus) {
+		if (dataStatus == DataStatus.ERROR)
+			Snackbar.make(recyclerView, getString(R.string.error_occured_message), Snackbar.LENGTH_INDEFINITE)
+			.setAction(getString(R.string.retry), v -> searchViewModel.searchFor(searchViewModel.getSearchQueryState()))
+			.show();
+	}
 
+	//inflates searchView menu item
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -101,7 +115,10 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 		return true;
 	}
 
-	//set triggered search query into SearchView edit text
+	/**
+	 * set triggered search query into SearchView edit text
+	 * @param menuItem searchView menu item
+	 */
 	private void setupSearchView(MenuItem menuItem) {
 		menuItem.expandActionView();
 		searchView = (SearchView) menuItem.getActionView();
