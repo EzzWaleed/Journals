@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout >
+<layout xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="news"
@@ -8,188 +8,160 @@
             name="onShareClick"
             type="com.ezz.newsapp.news.adapter.NewsAdapter.ShareClickListener"/>
     </data>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="280dp"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:foreground="@drawable/ripple_item">
+    android:layout_marginStart="15dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageView
+        android:id="@+id/news_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:scaleType="centerCrop"
+        android:foreground="#57000000"
+        android:transitionName="@string/image_transition"
+        tools:targetApi="lollipop"
+        android:tag="newsImage"/>
+
+
+
+    <ImageButton
+        android:id="@+id/share_ig_btn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="#00FFFFFF"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_share_black_24dp"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        android:foreground="@drawable/ripple_round"
+        android:onClick="@{() -> onShareClick.onClick(news)}"
+        android:contentDescription="@string/share_button_content_description" />
+
+    <View
+        android:id="@+id/sep_1"
+        android:layout_width="20dp"
+        android:layout_height="2dp"
+        app:layout_constraintStart_toStartOf="@id/share_ig_btn"
+        app:layout_constraintBottom_toTopOf="@id/share_ig_btn"
+        android:layout_marginBottom="20dp"
+        android:background="#ADFFFFFF"/>
+
+    <View
+        android:id="@+id/sep_2"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        app:layout_constraintStart_toEndOf="@id/sep_1"
+        app:layout_constraintBottom_toBottomOf="@id/sep_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="15dp"
+        android:background="#2AFFFFFF"/>
+
+
+    <TextView
+        android:id="@+id/source_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="110dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintStart_toStartOf="@id/sep_1"
+        app:layout_constraintBottom_toTopOf="@id/sep_1"
+        android:layout_marginBottom="20dp"
+        tools:text="New York Times"
+        android:textSize="15sp"
+        android:typeface="normal"
+        android:textStyle="normal"
+        android:text="@{news.sourceName}"
+        android:textColor="@color/colorWhiteFaded"/>
+
+    <TextView
+        android:id="@+id/date_source_sep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        app:layout_constraintStart_toEndOf="@id/source_name_tv"
+        app:layout_constraintBottom_toTopOf="@id/sep_1"
+        android:layout_marginStart="7dp"
+        android:layout_marginBottom="20dp"
+        android:text="\u2022"
+        android:textSize="15sp"
+        android:typeface="normal"
+        android:textStyle="bold"
+        android:textColor="@color/colorWhiteFaded"/>
+
+    <TextView
+        android:id="@+id/date_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:ellipsize="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/date_source_sep"
+        app:layout_constraintBottom_toTopOf="@id/sep_1"
+        android:layout_marginStart="7dp"
+        android:layout_marginBottom="20dp"
+        tools:text="@tools:sample/date/mmddyy"
+        android:textSize="15sp"
+        android:typeface="normal"
+        android:textStyle="normal"
+        android:text="@{news.dateFormatted}"
+        android:textColor="@color/colorWhiteFaded"/>
+
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/sep_1"
+        app:layout_constraintBottom_toTopOf="@id/source_name_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textSize="22sp"
+        android:text="@{news.title}"
+        tools:text="@tools:sample/lorem/random"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:id="@+id/time_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/title_tv"
+        app:layout_constraintStart_toStartOf="@id/title_tv"
+        android:layout_marginBottom="15dp"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:ellipsize="end"
+        android:layout_marginEnd="20dp"
+        android:text="Today"
+        app:date="@{news.publishedDate}"
+        android:textColor="@color/colorWhiteFaded"/>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/color_bg_white_dark">
+        android:layout_height="match_parent"
+        app:url="@{news.imageUrl}"
+        app:imageViewTag='@{String.format("newsImage")}'>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#11323A"></View>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/source_name_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:ellipsize="end"
-                android:gravity="center"
-                android:lines="2"
-                android:maxWidth="150dp"
-                android:textColor="@color/color_black"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                tools:text="@tools:sample/lorem/random"
-                android:text="@{news.sourceName}"/>
-
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/time_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="8dp"
-            android:maxLines="1"
-            android:textSize="12sp"
-            android:gravity="end"
-            android:ellipsize="end"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/linearLayout"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@tools:sample/lorem"
-            app:date="@{news.publishedDate}"/>
-
-        <ImageButton
-            android:id="@+id/share_ig_btn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="#00FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_share_black_24dp"
-            android:padding="5dp"
-            android:scaleType="fitCenter"
-            android:foreground="@drawable/ripple_round"
-            android:onClick="@{() -> onShareClick.onClick(news)}"
-            android:contentDescription="@string/share_button_content_description" />
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <TextView
-            android:id="@+id/title_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:textStyle="bold"
-            android:ellipsize="end"
-            android:maxWidth="200dp"
-            android:textColor="@color/color_black"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@tools:sample/lorem/random"
-            android:text="@{news.title}"/>
-
-
-
-        <TextView
-            android:id="@+id/description_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            tools:text="@tools:sample/lorem/random"
-            android:textColor="@color/color_black"
-            android:textSize="14sp"
-            android:ellipsize="end"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_tv"
-            android:text="@{news.description}"/>
-
-
-        <TextView
-            android:id="@+id/date_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="5dp"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description_tv"
-            tools:text="@tools:sample/date/mmddyy"
-            android:textColor="@color/color_black"
-            android:lines="1"
-            android:text="@{news.dateFormatted}"/>
-
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/date_tv"
-            app:shimmer_auto_start="false"
-            app:url="@{news.imageUrl}"
-            app:shimmer_highlight_alpha="0.2"
-            app:imageViewTag='@{String.format("newsImage")}'>
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/color_bg_white_dark"
-                tools:targetApi="lollipop" />
-
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
-
-        <ImageView
-            android:id="@+id/news_image"
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/date_tv"
-            android:transitionName="@string/image_transition"
-            tools:targetApi="lollipop"
-            android:tag="newsImage"
-            android:contentDescription="@string/news_image_content_description" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</LinearLayout>
-
+</androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

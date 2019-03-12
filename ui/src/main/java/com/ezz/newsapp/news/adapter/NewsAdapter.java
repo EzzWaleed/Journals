@@ -6,8 +6,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.ezz.newsapp.R;
+
 import com.ezz.newsapp.databinding.ListItemNewsBinding;
-import com.ezz.newsapp.databinding.ListItemNewsNewBinding;
 import com.ezz.newsapp.util.ShareUtil;
 import com.ezz.presentation.model.NewsUI;
 
@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.internal.Utils;
+
 
 /**
  * Created by Ezz Waleed on 08,March,2019
@@ -40,8 +40,8 @@ public class NewsAdapter extends PagedListAdapter<NewsUI, NewsAdapter.NewsViewHo
 	public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		LayoutInflater layoutInflater =
 		LayoutInflater.from(parent.getContext());
-		ListItemNewsNewBinding itemBinding =
-		ListItemNewsNewBinding.inflate(layoutInflater, parent, false);
+		ListItemNewsBinding itemBinding =
+		ListItemNewsBinding.inflate(layoutInflater, parent, false);
 		return new NewsViewHolder(itemBinding);
 	}
 
@@ -53,12 +53,12 @@ public class NewsAdapter extends PagedListAdapter<NewsUI, NewsAdapter.NewsViewHo
 
 	class NewsViewHolder extends RecyclerView.ViewHolder implements ShareClickListener{
 
-		private final ListItemNewsNewBinding listItemNewsNewBinding;
+		private final ListItemNewsBinding listItemNewsNewBinding;
 
 		@BindView(R.id.news_image)
 		ImageView imageView;
 
-		NewsViewHolder(@NonNull ListItemNewsNewBinding listItemNewsNewBinding) {
+		NewsViewHolder(@NonNull ListItemNewsBinding listItemNewsNewBinding) {
 			super(listItemNewsNewBinding.getRoot());
 			this.listItemNewsNewBinding = listItemNewsNewBinding;
 			ButterKnife.bind(this, listItemNewsNewBinding.getRoot());

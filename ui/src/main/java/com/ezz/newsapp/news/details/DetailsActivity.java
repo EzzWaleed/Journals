@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.ezz.newsapp.databinding.ActivityDetailsBinding;
-import com.ezz.newsapp.databinding.ActivityDetailsNewBinding;
 import com.ezz.newsapp.news.details.di.DaggerDetailsActivityComponent;
 import com.ezz.newsapp.news.details.font_settings.FontSettings;
 import com.ezz.newsapp.news.details.font_settings.FontSettingsBottomSheet;
@@ -20,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.adapters.SeekBarBindingAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -28,7 +26,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 
 import com.ezz.newsapp.R;
 
@@ -69,7 +66,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fullScreenMode();
-        ActivityDetailsNewBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_details_new);
+        ActivityDetailsBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_details);
         ButterKnife.bind(this);
 
 
