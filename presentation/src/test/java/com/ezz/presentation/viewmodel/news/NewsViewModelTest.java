@@ -46,14 +46,16 @@ public class NewsViewModelTest {
 	@Mock
 	PagedList<NewsUI> pagedList;
 
+	private NewsViewModel viewModel;
+
 	@Before
 	public void setUp() {
 		initMocks(this);
+		viewModel = new NewsViewModel(Schedulers.trampoline(), Schedulers.trampoline(), usecase, new PagingState());
 	}
 
 	@Test
 	public void test_create_paged_list_with_success() throws InterruptedException {
-		NewsViewModel viewModel = new NewsViewModel(Schedulers.trampoline(), Schedulers.trampoline(), usecase, new PagingState());
 		when(usecase.getNewsPagedList()).thenReturn(Observable.just(pagedList));
 		viewModel.createNewsPagedList();
 		assertEquals(LiveDataTestUtil.getValue(viewModel.getNewsPagedListLiveData()), pagedList);
@@ -62,7 +64,6 @@ public class NewsViewModelTest {
 
 	@Test
 	public void test_create_paged_list_with_loading() throws InterruptedException {
-		NewsViewModel viewModel = new NewsViewModel(Schedulers.trampoline(), Schedulers.trampoline(), usecase, new PagingState());
 		Observable<PagedList<NewsUI>> observable = Observable.empty();
 		when(usecase.getNewsPagedList()).thenReturn(observable);
 		viewModel.createNewsPagedList();
@@ -72,7 +73,6 @@ public class NewsViewModelTest {
 
 	@Test
 	public void test_create_paged_list_with_error() throws InterruptedException {
-		NewsViewModel viewModel = new NewsViewModel(Schedulers.trampoline(), Schedulers.trampoline(), usecase, new PagingState());
 		Observable<PagedList<NewsUI>> observable = Observable.create(emitter -> emitter.onError(new NullPointerException()));
 		when(usecase.getNewsPagedList()).thenReturn(observable);
 		viewModel.createNewsPagedList();
@@ -81,8 +81,7 @@ public class NewsViewModelTest {
 	}
 
 	@Test
-	public void verify_create_paged_called_only_once_in_success() throws InterruptedException {
-		NewsViewModel viewModel = new NewsViewModel(Schedulers.trampoline(), Schedulers.trampoline(), usecase, new PagingState());
+	public void verify_create_paged_list_called_only_once_in_success() throws InterruptedException {
 		when(usecase.getNewsPagedList()).thenReturn(Observable.just(pagedList));
 		verify(usecase, times(0)).getNewsPagedList();
 		viewModel.createNewsPagedList();
@@ -92,8 +91,7 @@ public class NewsViewModelTest {
 	}
 
 	@Test
-	public void verify_create_paged_called_every_time_in_error() throws InterruptedException {
-		NewsViewModel viewModel = new NewsViewModel(Schedulers.trampoline(), Schedulers.trampoline(), usecase, new PagingState());
+	public void verify_create_paged_list_called_every_time_in_error() throws InterruptedException {
 		when(usecase.getNewsPagedList()).thenReturn(Observable.create(emitter -> {
 			emitter.onError(new NullPointerException());
 		}));
@@ -108,7 +106,6 @@ public class NewsViewModelTest {
 
 	@Test
 	public void success_load_news() throws InterruptedException {
-		NewsViewModel viewModel = new NewsViewModel(Schedulers.trampoline(), Schedulers.trampoline(), usecase, new PagingState());
 		when(usecase.loadNews(1)).thenReturn(Observable.just(DataStatus.SUCCESS));
 		viewModel.loadNews(1);
 		assertEquals(LiveDataTestUtil.getValue(viewModel.getLoadNewsStats()), DataStatus.SUCCESS);
@@ -116,7 +113,6 @@ public class NewsViewModelTest {
 
 	@Test
 	public void loading_news() throws InterruptedException {
-		NewsViewModel viewModel = new NewsViewModel(Schedulers.trampoline(), Schedulers.trampoline(), usecase, new PagingState());
 		when(usecase.loadNews(1)).thenReturn(Observable.just(DataStatus.LOADING));
 		viewModel.loadNews(1);
 		assertEquals(LiveDataTestUtil.getValue(viewModel.getLoadNewsStats()), DataStatus.LOADING);
@@ -124,7 +120,6 @@ public class NewsViewModelTest {
 
 	@Test
 	public void error_load_news() throws InterruptedException {
-		NewsViewModel viewModel = new NewsViewModel(Schedulers.trampoline(), Schedulers.trampoline(), usecase, new PagingState());
 		when(usecase.loadNews(1)).thenReturn(Observable.just(DataStatus.ERROR));
 		viewModel.loadNews(1);
 		assertEquals(LiveDataTestUtil.getValue(viewModel.getLoadNewsStats()), DataStatus.ERROR);
@@ -132,7 +127,6 @@ public class NewsViewModelTest {
 
 	@Test
 	public void all_news_items_loaded() throws InterruptedException {
-		NewsViewModel viewModel = new NewsViewModel(Schedulers.trampoline(), Schedulers.trampoline(), usecase, new PagingState());
 		when(usecase.loadNews(1)).thenReturn(Observable.just(DataStatus.HAS_LOADED_ALL_ITEMS));
 		viewModel.loadNews(1);
 		assertEquals(LiveDataTestUtil.getValue(viewModel.getLoadNewsStats()), DataStatus.HAS_LOADED_ALL_ITEMS);
