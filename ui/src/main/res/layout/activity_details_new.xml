@@ -99,6 +99,7 @@
                         android:textSize="15sp"
                         android:typeface="normal"
                         android:textStyle="normal"
+                        android:text="@{news.dateFormatted}"
                         android:textColor="@color/colorWhiteFaded"/>
 
 
