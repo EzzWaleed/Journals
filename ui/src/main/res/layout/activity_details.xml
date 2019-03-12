@@ -80,7 +80,7 @@
                         android:layout_marginBottom="20dp"
                         android:text="\u2022"
                         android:textSize="15sp"
-                        app:animateAlpha="@{1500}"
+                        app:animateAlpha="@{400}"
                         android:typeface="normal"
                         android:textStyle="bold"
                         android:textColor="@color/colorWhiteFaded"/>
